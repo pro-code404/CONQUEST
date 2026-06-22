@@ -1,0 +1,47 @@
+---
+description: Conquest is a cognitive operating system — every change must strengthen the ten-phase pipeline
+alwaysApply: true
+---
+
+# Conquest CIOS — Architectural Law
+
+Cursor operates as **Chief Systems Engineer**, not a code generator.
+
+## First Law
+
+Conquest is never finished. Every interaction improves the OS. Every correction becomes permanent knowledge unless disproven.
+
+Conquest is **not** a prompt-response application. It is a **self-evolving cognitive operating system**.
+
+Every interaction flows through one continuous loop:
+
+```
+Perceive → Understand → Reconstruct Context → Reason → Plan → Orchestrate → Verify → Execute → Reflect → Learn
+```
+
+## Before adding or modifying code
+
+1. Name the pipeline phase (1–10) this change belongs to
+2. Define the structured artifact it consumes and produces
+3. Confirm it does not duplicate another module's single question
+4. Confirm cross-engine coordination goes through the Orchestrator
+
+## Non-negotiables
+
+- **No generation before planning** (phases 1–5 are understanding; execution starts at phase 8)
+- **Verification is mandatory** — failures reroute upstream, never to the user
+- **HIE translates humans; it does not generate responses**
+- **Memory is compression** — patterns and verified knowledge, not raw chat logs
+- **Structured messages only** between services (schema-validated, traceable)
+
+## Golden rule
+
+Each module answers exactly one question. See `AGENTS.md` and `docs/architecture/cognitive-pipeline.md`.
+
+If a feature has no place in the pipeline, it does not belong in Conquest yet.
+
+## Evolution safety
+
+Autonomous optimization: routing, prompts, workflows, caching, memory — yes.
+
+Autonomous code rewrite or production deploy — **never** without human approval and testing.

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CIOS — Conquest Intelligence OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/preview.css" />
+</head>
+<body class="cios">
+  <header class="topnav">
+    <div class="topnav__brand" title="Conquest Intelligence Operating System">CIOS</div>
+    <div class="topnav__search-wrap">
+      <div class="topnav__search">
+        <i data-lucide="search" class="icon"></i>
+        <input type="text" class="topnav__search-input" id="commandInput"
+          placeholder="Ask Conquest anything… (e.g. 'Why did sales drop 12% last week?')"
+          value="" />
+        <kbd class="topnav__kbd">⌘K</kbd>
+        <button type="button" class="topnav__exec" id="commandRun" hidden>Run</button>
+      </div>
+    </div>
+    <div class="topnav__actions">
+      <button type="button" class="topnav__icon-btn" aria-label="Activity"><i data-lucide="activity" class="icon"></i></button>
+      <button type="button" class="topnav__icon-btn topnav__icon-btn--badge" aria-label="Notifications" data-badge="12">
+        <i data-lucide="bell" class="icon"></i>
+      </button>
+      <button type="button" class="topnav__icon-btn" aria-label="Settings"><i data-lucide="sun" class="icon"></i></button>
+      <div class="topnav__user">
+        <div class="topnav__avatar-img">MK</div>
+        <div class="topnav__user-info">
+          <span class="topnav__user-name">Marcus Kane</span>
+          <span class="topnav__user-plan">Enterprise Plan</span>
+        </div>
+      </div>
+    </div>
+    <div class="topnav__phases" id="phaseStrip" aria-hidden="true"></div>
+  </header>
+
+  <aside class="sidebar">
+    <nav class="sidebar__nav" id="navRail" aria-label="Main navigation"></nav>
+    <div class="sidebar__status">
+      <div class="sidebar__status-label">SYSTEM STATUS</div>
+      <div class="sidebar__status-row">
+        <span class="sidebar__status-dot"></span>
+        <span>All Systems Operational</span>
+      </div>
+      <div class="sidebar__uptime">
+        <span class="sidebar__uptime-val" id="uptimeVal">98.7%</span>
+        <span class="sidebar__uptime-lbl">Uptime</span>
+        <svg class="sidebar__uptime-spark" id="uptimeSpark"></svg>
+      </div>
+      <div class="sidebar__status-meta" id="statusMeta">Last checked: 2s ago</div>
+    </div>
+    <div class="sidebar__footer">
+      <button type="button" class="sidebar__footer-btn" aria-label="Help"><i data-lucide="help-circle" class="icon icon--sm"></i></button>
+      <button type="button" class="sidebar__footer-btn" aria-label="Docs"><i data-lucide="book-open" class="icon icon--sm"></i></button>
+      <button type="button" class="sidebar__footer-btn" aria-label="Collapse"><i data-lucide="chevrons-left" class="icon icon--sm"></i></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main__inner">
+      <header class="section-head">
+        <div class="section-head__left">
+          <h1 class="section-head__title">EXECUTIVE OVERVIEW</h1>
+          <span class="live-pill"><span class="live-pill__dot"></span>Live</span>
+        </div>
+        <div class="section-head__right">
+          <select class="select-pill" id="periodSelect"><option>Last 7 Days</option><option>Last 30 Days</option><option>Last 24 Hours</option></select>
+          <button type="button" class="btn-ghost">Customize</button>
+        </div>
+      </header>
+
+      <section class="kpi-row" id="kpiRow" aria-label="Executive KPIs"></section>
+
+      <section class="card card--perf">
+        <header class="card__head card__head--perf">
+          <div class="card__head-left">
+            <h2 class="card__title card__title--perf">PERFORMANCE INTELLIGENCE</h2>
+            <div class="chart-legend chart-legend--inline">
+              <span><i class="legend-swatch legend-swatch--blue"></i>Content Reach</span>
+              <span><i class="legend-swatch legend-swatch--green"></i>Product Reach</span>
+            </div>
+          </div>
+          <div class="card__head-actions">
+            <button type="button" class="select-pill select-pill--btn">Compare ▾</button>
+            <button type="button" class="select-pill select-pill--btn">Daily ▾</button>
+            <button type="button" class="topnav__icon-btn" aria-label="More"><i data-lucide="more-horizontal" class="icon icon--sm"></i></button>
+          </div>
+        </header>
+        <div class="chart-wrap" id="vizCanvas">
+          <svg class="chart-svg" id="reachChart"></svg>
+          <div class="chart-annotations" id="chartAnnotations"></div>
+          <div class="chart-crosshair" id="vizCrosshair"></div>
+          <div class="chart-tooltip" id="vizTooltip"></div>
+        </div>
+      </section>
+
+      <section class="bottom-row">
+        <div class="card card--third card--platforms">
+          <header class="card__head">
+            <h2 class="card__title">Top Performing Platforms</h2>
+            <span class="platforms-period" id="platformsPeriod">Last 30 Days</span>
+          </header>
+          <div class="platforms-summary" id="platformsSummary"></div>
+          <div class="platforms-list" id="platformsList"></div>
+          <div class="platforms-insight" id="platformsInsight"></div>
+          <a href="#" class="card__link">View All Platforms →</a>
+        </div>
+        <div class="card card--third">
+          <header class="card__head"><h2 class="card__title">AI Insights</h2></header>
+          <div class="ai-insights-list" id="aiInsightsList"></div>
+          <a href="#" class="card__link">View All Insights →</a>
+        </div>
+        <div class="card card--third card--revenue">
+          <header class="card__head">
+            <h2 class="card__title">Revenue Breakdown</h2>
+            <span class="revenue-period" id="revenuePeriod">Last 30 Days</span>
+          </header>
+          <div class="revenue-hero">
+            <div class="revenue-hero__total" id="donutCenter">$2.45M</div>
+            <div class="revenue-hero__change" id="revenueChange">+18.6% MoM</div>
+          </div>
+          <div class="revenue-kpis" id="revenueKpis"></div>
+          <div class="donut-wrap">
+            <svg class="chart-svg" id="donutChart"></svg>
+          </div>
+          <div class="revenue-stack" id="revenueStack"></div>
+          <div class="donut-legend" id="donutLegend"></div>
+          <div class="revenue-insight" id="revenueInsight"></div>
+        </div>
+      </section>
+
+      <section class="card card--hidden" id="pipelineOutput" aria-hidden="true">
+        <div class="pipeline-output" id="responseBody"></div>
+        <div class="meta-row" id="responseMeta"></div>
+      </section>
+    </div>
+  </main>
+
+  <aside class="intel">
+    <div class="intel__orb-wrap">
+      <div class="intel__orb" aria-hidden="true">
+        <svg class="intel__orb-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bloodSphere" cx="38%" cy="32%" r="62%">
+              <stop offset="0%" stop-color="#a82828"/>
+              <stop offset="35%" stop-color="#6b1212"/>
+              <stop offset="72%" stop-color="#3d0808"/>
+              <stop offset="100%" stop-color="#1a0303"/>
+            </radialGradient>
+            <radialGradient id="limbGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="82%" stop-color="transparent"/>
+              <stop offset="92%" stop-color="#8b1a1a" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#c44040" stop-opacity="0.35"/>
+            </radialGradient>
+            <filter id="craterSoft" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="0.4"/>
+            </filter>
+          </defs>
+          <!-- Eclipse halo -->
+          <circle cx="60" cy="60" r="58" fill="none" stroke="#5c1010" stroke-width="1" opacity="0.4"/>
+          <circle cx="60" cy="60" r="56" fill="url(#bloodSphere)"/>
+          <!-- Maria (dark lunar seas) -->
+          <ellipse cx="42" cy="48" rx="18" ry="14" fill="#2a0505" opacity="0.65"/>
+          <ellipse cx="72" cy="38" rx="12" ry="10" fill="#320606" opacity="0.5"/>
+          <ellipse cx="58" cy="72" rx="22" ry="16" fill="#250404" opacity="0.55"/>
+          <ellipse cx="28" cy="62" rx="10" ry="8" fill="#2e0505" opacity="0.45"/>
+          <ellipse cx="82" cy="58" rx="9" ry="11" fill="#300606" opacity="0.4"/>
+          <!-- Craters -->
+          <g fill="#1a0202" opacity="0.7" filter="url(#craterSoft)">
+            <circle cx="35" cy="32" r="5"/><circle cx="48" cy="28" r="3"/>
+            <circle cx="68" cy="52" r="4.5"/><circle cx="52" cy="58" r="6"/>
+            <circle cx="78" cy="44" r="2.5"/><circle cx="38" cy="68" r="3.5"/>
+            <circle cx="62" cy="42" r="2"/><circle cx="88" cy="62" r="3"/>
+            <circle cx="24" cy="44" r="2.8"/><circle cx="55" cy="82" r="4"/>
+            <circle cx="70" cy="78" r="2.2"/><circle cx="44" cy="52" r="1.8"/>
+            <circle cx="92" cy="38" r="1.5"/><circle cx="30" cy="78" r="2"/>
+          </g>
+          <!-- Crater rim highlights -->
+          <g fill="none" stroke="#9a3030" stroke-width="0.6" opacity="0.25">
+            <circle cx="35" cy="32" r="5"/><circle cx="52" cy="58" r="6"/>
+            <circle cx="68" cy="52" r="4.5"/><circle cx="55" cy="82" r="4"/>
+          </g>
+          <!-- Surface texture spots -->
+          <g fill="#4a0c0c" opacity="0.35">
+            <circle cx="46" cy="36" r="1.2"/><circle cx="64" cy="64" r="1"/>
+            <circle cx="72" cy="30" r="0.9"/><circle cx="33" cy="55" r="1.1"/>
+            <circle cx="58" cy="48" r="0.8"/><circle cx="80" cy="70" r="1.3"/>
+            <circle cx="40" cy="42" r="0.7"/><circle cx="50" cy="70" r="0.9"/>
+          </g>
+          <circle cx="60" cy="60" r="56" fill="url(#limbGlow)"/>
+        </svg>
+      </div>
+      <div class="intel__orb-label">AI Command Center</div>
+      <div class="intel__orb-status"><span class="live-pill__dot"></span> System Online</div>
+    </div>
+
+    <div class="intel__block">
+      <h3 class="intel__heading">Recommendations</h3>
+      <div id="dockRecommendations"></div>
+      <a href="#" class="card__link">View All Recommendations →</a>
+    </div>
+
+    <div class="intel__block">
+      <h3 class="intel__heading">Predictions</h3>
+      <p class="intel__sub">Next 7 Days</p>
+      <div id="dockPredictions"></div>
+      <a href="#" class="card__link">View Full Forecast →</a>
+    </div>
+
+    <div class="intel__block">
+      <h3 class="intel__heading">Recent Activity</h3>
+      <div class="activity-feed" id="dockActivity"></div>
+      <a href="#" class="card__link">View All Activity →</a>
+    </div>
+
+    <div class="intel__block intel__block--utility">
+      <h3 class="intel__heading">Cognitive Pipeline</h3>
+      <div class="pipeline-log" id="pipelineLog">Awaiting command…</div>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <script src="/preview-data.js"></script>
+  <script src="/preview-charts.js"></script>
+  <script src="/preview.js"></script>
+</body>
+</html>

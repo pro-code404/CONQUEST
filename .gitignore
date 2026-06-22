@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+*.log
+coverage/
+.turbo/
+.netlify/
+.DS_Store
+*.tsbuildinfo
+drizzle/meta/

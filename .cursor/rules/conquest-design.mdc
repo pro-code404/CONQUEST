@@ -1,0 +1,38 @@
+---
+description: Conquest UI is a Digital Command Center — never build generic dashboards
+alwaysApply: true
+globs: apps/**/*,packages/ui/**/*
+---
+
+# Conquest Design Law
+
+Conquest UI is a **Digital Command Center**, not a SaaS analytics dashboard.
+
+Read [`docs/design/design-architecture-constitution.md`](docs/design/design-architecture-constitution.md) before any UI work.
+
+## Four layers (required shell)
+
+1. **Command Layer** — search, AI command bar, model switcher (always visible)
+2. **Navigation Rail** — modules, not pages
+3. **Module Workspace** — independent environment per module
+4. **Intelligence Dock** — always-alive right panel
+
+## Forbidden
+
+- Generic sidebar + cards + charts layout
+- Static KPI tiles without drill-down, confidence, prediction
+- Feature boxes instead of Intelligence Models
+- Chat-only UI without command layer
+- Decorative animation
+
+## Required
+
+- Smart Summary Cards (value, deltas, insight, confidence, prediction)
+- Intelligence Models transform workspace (Growth, Commerce, Social, etc.)
+- Hover intelligence on primary visualizations
+- Full drill-down expansion (metric → platform → segment → revenue)
+- Motion 150–250ms for state only
+
+## Principle
+
+Reduce visual complexity. Increase information density.
