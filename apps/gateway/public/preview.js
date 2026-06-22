@@ -59,16 +59,21 @@ function renderKpis() {
   document.getElementById("kpiRow").innerHTML = data.kpis.map((k) => `
     <article class="kpi-card">
       <div class="kpi-card__label">${k.label}</div>
-      <div class="kpi-card__value">${k.display}</div>
-      <div class="kpi-card__change">${k.change}</div>
-      <svg class="kpi-card__spark" id="kpi-spark-${k.id}"></svg>
+      <div class="kpi-card__body">
+        <div class="kpi-card__metrics">
+          <div class="kpi-card__value">${k.display}</div>
+          <div class="kpi-card__change">${k.change}</div>
+        </div>
+        <svg class="kpi-card__spark" id="kpi-spark-${k.id}"></svg>
+      </div>
     </article>
   `).join("");
   data.kpis.forEach((k) => {
     ChartEngine.renderSpark(
       document.getElementById(`kpi-spark-${k.id}`),
-      ChartEngine.generateSpark(k.seed),
+      ChartEngine.generateAnalysisSpark(k.seed, 9),
       k.color,
+      ChartEngine.analysisSparkOpts,
     );
   });
 }
@@ -205,7 +210,14 @@ function renderPlatforms() {
 
   data.platforms.forEach((p, i) => {
     const el = document.getElementById(`platformSpark${i}`);
-    if (el) ChartEngine.renderSpark(el, ChartEngine.generateSpark(p.seed, 18), p.color);
+    if (el) {
+      ChartEngine.renderSpark(
+        el,
+        ChartEngine.generateAnalysisSpark(p.seed, 9),
+        p.color,
+        { ...ChartEngine.analysisSparkOpts, width: 72, height: 22 },
+      );
+    }
   });
   initLucide();
 }
@@ -288,7 +300,12 @@ function renderIntel() {
     </div>
   `).join("");
   data.predictions.forEach((p, i) => {
-    ChartEngine.renderSpark(document.getElementById(`pred-spark-${i}`), ChartEngine.generateSpark(p.seed), "#16C784");
+    ChartEngine.renderSpark(
+      document.getElementById(`pred-spark-${i}`),
+      ChartEngine.generateAnalysisSpark(p.seed, 9),
+      "#16C784",
+      { ...ChartEngine.analysisSparkOpts, width: 56, height: 20 },
+    );
   });
 
   document.getElementById("dockActivity").innerHTML = data.activity.map((a) => `
@@ -301,7 +318,12 @@ function renderIntel() {
 }
 
 function renderUptimeSpark() {
-  ChartEngine.renderSpark(document.getElementById("uptimeSpark"), ChartEngine.generateSpark(99, 12), "#16C784");
+  ChartEngine.renderSpark(
+    document.getElementById("uptimeSpark"),
+    ChartEngine.generateAnalysisSpark(99, 8),
+    "#16C784",
+    { ...ChartEngine.analysisSparkOpts, width: 48, height: 20 },
+  );
 }
 
 function updateStatusMeta() {

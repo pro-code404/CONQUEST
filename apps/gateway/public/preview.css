@@ -317,10 +317,17 @@ body.cios {
   box-shadow: var(--shadow-panel-hover);
 }
 .kpi-card:hover::after { opacity: 1; }
-.kpi-card__label { font-size: 10px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
-.kpi-card__value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2px; font-variant-numeric: tabular-nums; }
-.kpi-card__change { font-size: 11px; font-weight: 600; color: var(--green); margin-bottom: 8px; }
-.kpi-card__spark { width: 100%; height: 32px; display: block; }
+.kpi-card__label { font-size: 10px; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
+.kpi-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.kpi-card__metrics { flex: 1; min-width: 0; }
+.kpi-card__value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.kpi-card__change { font-size: 11px; font-weight: 600; color: var(--green); font-variant-numeric: tabular-nums; }
+.kpi-card__spark { width: 56px; height: 28px; flex-shrink: 0; display: block; }
 
 /* CARDS */
 .card {

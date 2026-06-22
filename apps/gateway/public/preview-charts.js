@@ -130,10 +130,39 @@ const ChartEngine = (() => {
     svg.innerHTML = html;
   }
 
-  function renderSpark(svg, data, color) {
-    const w = 100, h = 32, pad = 2;
-    const pts = toPts(data, w, h, pad, pad, pad, pad, Math.max(...data) * 1.05);
+  function generateAnalysisSpark(seed, n = 9) {
+    const profile = [22, 78, 28, 72, 24, 68, 30, 62, 26, 58, 34, 70];
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const base = profile[(i + seed) % profile.length];
+      const swing = ((seed * 3 + i * 5) % 7) - 3;
+      out.push(Math.max(14, Math.min(86, base + swing)));
+    }
+    return out;
+  }
+
+  function renderSpark(svg, data, color, opts = {}) {
+    const w = opts.width || 100;
+    const h = opts.height || 32;
+    const pad = opts.pad ?? 2;
+    const maxVal = Math.max(...data, 1) * 1.05;
+    const pts = toPts(data, w, h, pad, pad, pad, pad, maxVal);
     svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+
+    if (opts.style === "analysis") {
+      const lineColor = opts.lineColor || "#C9A84C";
+      const baselineColor = opts.baselineColor || "#16C784";
+      const midY = h * 0.52;
+      const baselineStart = pad + (w - pad * 2) * 0.32;
+      const baselineEnd = w - pad;
+      const line = polyLinePath(pts);
+      svg.innerHTML = `
+        <line x1="${baselineStart.toFixed(1)}" y1="${midY.toFixed(1)}" x2="${baselineEnd.toFixed(1)}" y2="${midY.toFixed(1)}" stroke="${baselineColor}" stroke-width="1.25" stroke-opacity="0.9"/>
+        <path d="${line}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linejoin="miter" stroke-linecap="butt"/>
+      `;
+      return;
+    }
+
     svg.innerHTML = `<path d="${catmullRom(pts)}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round"/>`;
   }
 
@@ -207,7 +236,19 @@ const ChartEngine = (() => {
     return out;
   }
 
-  return { renderPerformance, renderDonut, renderSpark, attachHover, attachPeakHover, generateSpark, toPts };
+  const analysisSparkOpts = { style: "analysis", width: 56, height: 28 };
+
+  return {
+    renderPerformance,
+    renderDonut,
+    renderSpark,
+    attachHover,
+    attachPeakHover,
+    generateSpark,
+    generateAnalysisSpark,
+    analysisSparkOpts,
+    toPts,
+  };
 })();
 
 if (typeof window !== "undefined") window.ChartEngine = ChartEngine;
