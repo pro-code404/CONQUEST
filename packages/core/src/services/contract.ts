@@ -1,7 +1,7 @@
 import type { AgentMessage, ServiceResponse } from "../messages/envelope.js";
 import type { PipelineContext } from "../pipeline/context.js";
 
-/** Universal service contract — WSDD §6 */
+/** Universal service contract — SDD-I §5 */
 export interface CognitiveService<TInput = unknown, TOutput = unknown> {
   readonly name: string;
   readonly version: string;

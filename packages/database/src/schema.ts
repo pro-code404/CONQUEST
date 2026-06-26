@@ -1,6 +1,6 @@
 import { pgTable, uuid, text, timestamp, jsonb, real, integer, boolean, index } from "drizzle-orm/pg-core";
 
-/** Session state — WSDD §7 */
+/** Session state — SDD-II / ADR-0017 */
 export const sessions = pgTable("sessions", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id"),
@@ -11,7 +11,7 @@ export const sessions = pgTable("sessions", {
   expiresAt: timestamp("expires_at", { withTimezone: true }),
 }, (t) => [index("sessions_user_idx").on(t.userId)]);
 
-/** Unified memory stores — WDD §5 / WSDD §9 */
+/** Unified memory stores — AMD III / SDD-II Part 8 */
 export const memoryEntries = pgTable("memory_entries", {
   id: uuid("id").primaryKey().defaultRandom(),
   store: text("store").notNull(),

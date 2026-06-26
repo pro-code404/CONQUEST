@@ -72,17 +72,19 @@ No phase may be skipped unless explicitly configured with a documented routing r
 
 | Document | Question |
 |----------|----------|
+| [`docs/architecture/ccis.md`](docs/architecture/ccis.md) | What is the intelligence foundation? (**supreme authority**) |
 | [`docs/architecture/cognitive-pipeline.md`](docs/architecture/cognitive-pipeline.md) | What is the nervous system? |
 | [`docs/architecture/how-conquest-thinks.md`](docs/architecture/how-conquest-thinks.md) | How does Conquest think? |
 | [`docs/architecture/how-conquest-evolves.md`](docs/architecture/how-conquest-evolves.md) | How does Conquest evolve? |
 
-### Design constitution
+### Experience authority
 
 | Document | Question |
 |----------|----------|
-| [`docs/design/design-architecture-constitution.md`](docs/design/design-architecture-constitution.md) | How does Conquest look and command? |
+| [`docs/uxmd/volume-i-user-experience-master-document.md`](docs/uxmd/volume-i-user-experience-master-document.md) | How should Conquest feel? |
+| [`docs/uxmd/volume-iii-global-interaction-standards.md`](docs/uxmd/volume-iii-global-interaction-standards.md) | GIS — inherited interaction standards |
 
-UI is a **Digital Command Center** — four-layer shell, Intelligence Models, Smart Summary Cards. Never a generic admin dashboard.
+UI is a **Digital Command Center** per UXMD — not a generic admin dashboard. Pre-UXMD design artifacts are archived at [`docs/archive/design-pre-uxmd/`](docs/archive/design-pre-uxmd/).
 
 ---
 
@@ -201,16 +203,22 @@ Store patterns, goals, preferences, workflows, failures, and verified knowledge 
 ## Governance Hierarchy
 
 ```
-Constitution → WDD → WSDD → Architecture Trilogy → Design Constitution → Implementation → Configuration → Runtime Data
+CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governance → Build Authorization → Build
 ```
 
-Architecture trilogy: Cognitive Pipeline → How Conquest Thinks → How Conquest Evolves
+See [ADR-0001](docs/architecture/adr/0001-document-authority-hierarchy.md) and [`docs/architecture/ARCHITECTURE-FREEZE.md`](docs/architecture/ARCHITECTURE-FREEZE.md).
 
-Design: [`docs/design/design-architecture-constitution.md`](docs/design/design-architecture-constitution.md) — Command Center UX
+**Runtime expression:** The ten-phase cognitive pipeline ([`cognitive-pipeline.md`](docs/architecture/cognitive-pipeline.md)) is subordinate to CCIS and [ADR-0007](docs/architecture/adr/0007-ccis-cognitive-lifecycle-order.md).
 
-Lower layers extend higher layers. They never contradict them.
+**Experience:** UXMD I–III + GIS + [Document X](docs/uxmd/document-x-product-experience-operational-details.md) — not archived pre-UXMD design docs.
 
-When documents conflict, the higher layer prevails. When implementing, the **Cognitive Pipeline** is the runtime contract that unifies all layers.
+When documents conflict, the higher layer in the chain above prevails.
+
+**Build-0 authorized** per [`docs/governance/build-authorization-record-build-0-2026-06-21.md`](docs/governance/build-authorization-record-build-0-2026-06-21.md). Build-1+ requires separate BAR.
+
+See [`docs/governance/build-0-status-v1.0.md`](docs/governance/build-0-status-v1.0.md) and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
+
+**Prototype code** in `apps/`, `packages/`, `services/` is quarantined — see [`PROTOTYPE.md`](PROTOTYPE.md).
 
 ---
 

@@ -2,7 +2,9 @@
 
 ## Status
 
-**Canonical runtime specification.** This document defines the nervous system of Conquest — how cognition flows as one continuous loop, not as disconnected modules.
+**Canonical runtime specification — subordinate to CCIS and [ADR-0007](adr/0007-ccis-cognitive-lifecycle-order.md).**
+
+This document defines the ten-phase runtime loop expression. The CCIS twelve-stage loop and AMD IV §69 prevail where they differ.
 
 ---
 
@@ -448,22 +450,24 @@ interface MemoryDelta {
 
 ---
 
-## Mapping to WDD / WSDD
+## Mapping to engineering layers (legacy reference)
 
-| Pipeline phase | WDD layer | WSDD service(s) |
-|----------------|-----------|-----------------|
-| 1. Perception | L1 Interface | API Gateway, Session Manager |
-| 2. Human Understanding | L3 Cognitive | Understanding Service + HIE |
-| 3. Context Reconstruction | L3 + L5 | Context Engine, Memory Service |
-| 4. Goal Reasoning | L3 Cognitive | Reasoning Service |
-| 5. Strategy Planning | L3 Cognitive | Planning Service |
-| 6. Orchestration | L2 Orchestration | Intelligent Orchestrator |
-| 7. Verification | L3 Cognitive | Verification Service, QA Gate |
-| 8. Execution | L4 Execution | Execution Service, domain agents |
-| 9. Reflection | L6 Learning | Reflection Service |
-| 10. Memory Evolution | L5 Memory | Memory Service, Learning Engine |
+> **Superseded mapping.** WDD/WSDD nomenclature is retired. Authoritative deployment expression: SDD I–V, AMD IV §69, SDD-IV.
 
-The pipeline is the runtime contract. WDD layers and WSDD services are deployment expressions of the same loop.
+| Pipeline phase | Engineering layer | SDD expression |
+|----------------|-------------------|----------------|
+| 1. Perception | Experience / ingress | SDD-I L1 |
+| 2. Human Understanding | Intelligence | SDD-IV |
+| 3. Context Reconstruction | Intelligence + Data | SDD-II |
+| 4. Goal Reasoning | Intelligence | SDD-IV |
+| 5. Strategy Planning | Intelligence | SDD-IV |
+| 6. Orchestration | Orchestration | SDD-IV, SDD-I |
+| 7. Verification | Intelligence | SDD-II §5.6, ADR-0006 |
+| 8. Execution | Execution L5E | SDD-I, ADR-0015 |
+| 9. Reflection | Intelligence | SDD-IV |
+| 10. Memory Evolution | Data / Memory | AMD III, SDD-II IL-2 |
+
+The pipeline is a subordinate runtime expression. CCIS and ADR-0007 define canonical stage order.
 
 ---
 

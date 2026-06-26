@@ -1,31 +1,9 @@
-# Conquest Design System
+# Superseded — Pre-UXMD Design Artifacts
 
-Conquest is not built to display data. It is built to **command an entire digital ecosystem**.
+**This folder is retired.** All content has been archived.
 
-The UI is a **Digital Command Center** — Mission Control for intelligence, not a SaaS analytics dashboard.
+**Authoritative experience documentation:** UXMD Volumes I–III + [Document X](../uxmd/document-x-product-experience-operational-details.md) — [`../uxmd/README.md`](../uxmd/README.md)
 
-## Governance
+**Archive location:** [`../archive/design-pre-uxmd/`](../archive/design-pre-uxmd/)
 
-```
-Constitution → WDD → WSDD → Architecture Trilogy → Design Constitution → Implementation
-```
-
-The Design Constitution extends the cognitive operating system into experience. It never contradicts engineering architecture.
-
-## Documents
-
-| Document | Scope |
-|----------|-------|
-| [`design-architecture-constitution.md`](design-architecture-constitution.md) | **Master authority** — philosophy, four-layer shell, models, anti-patterns |
-| [`layout-system.md`](layout-system.md) | Command Layer, Navigation Rail, Module Workspaces, Intelligence Dock |
-| [`visual-language.md`](visual-language.md) | Color, typography, spacing, motion, elevation, light/dark |
-| [`intelligence-models.md`](intelligence-models.md) | Model-based operating modes (Growth, Commerce, Social, etc.) |
-| [`modules-registry.md`](modules-registry.md) | Every module, workspace zones, drill-down hierarchy |
-| [`components.md`](components.md) | Smart Summary Cards, charts, tables, command bar, dock panels |
-| [`design-tokens.md`](design-tokens.md) | Token reference for implementation |
-
-## Design law
-
-> Reduce visual complexity. Increase information density. Never build a generic admin dashboard.
-
-All UI work begins with [`design-architecture-constitution.md`](design-architecture-constitution.md).
+Do not implement from this path.

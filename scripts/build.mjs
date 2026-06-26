@@ -18,7 +18,7 @@ const order = [
   "services/session",
   "services/memory",
   "services/orchestrator",
-  "apps/gateway",
+  // apps/gateway excluded — quarantined prototype; not Build-0 CI scope (see PROTOTYPE.md)
 ];
 
 for (const rel of order) {

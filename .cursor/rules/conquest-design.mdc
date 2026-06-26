@@ -1,38 +1,30 @@
 ---
-description: Conquest UI is a Digital Command Center — never build generic dashboards
+description: Conquest UI follows UXMD and GIS — never generic dashboards
 alwaysApply: true
 globs: apps/**/*,packages/ui/**/*
 ---
 
 # Conquest Design Law
 
-Conquest UI is a **Digital Command Center**, not a SaaS analytics dashboard.
+Conquest UI is governed by **UXMD Volumes I–III** and **GIS** — not archived pre-UXMD design docs.
 
-Read [`docs/design/design-architecture-constitution.md`](docs/design/design-architecture-constitution.md) before any UI work.
+Read before any UI work:
 
-## Four layers (required shell)
+- `docs/uxmd/volume-i-user-experience-master-document.md`
+- `docs/uxmd/volume-ii-screen-interaction-specification.md`
+- `docs/uxmd/volume-iii-global-interaction-standards.md`
 
-1. **Command Layer** — search, AI command bar, model switcher (always visible)
-2. **Navigation Rail** — modules, not pages
-3. **Module Workspace** — independent environment per module
-4. **Intelligence Dock** — always-alive right panel
+**Build is not authorized.** `apps/gateway/public/preview.*` is a pipeline demo only — not the UXMD application.
+
+## Principles (from UXMD)
+
+- Command Center is home (ADR-0002)
+- Seven-item primary navigation (ADR-0005)
+- Workspace is context, not nav (ADR-0003)
+- GIS inheritance on all screens unless documented override (ADR-0012)
 
 ## Forbidden
 
-- Generic sidebar + cards + charts layout
-- Static KPI tiles without drill-down, confidence, prediction
-- Feature boxes instead of Intelligence Models
-- Chat-only UI without command layer
-- Decorative animation
-
-## Required
-
-- Smart Summary Cards (value, deltas, insight, confidence, prediction)
-- Intelligence Models transform workspace (Growth, Commerce, Social, etc.)
-- Hover intelligence on primary visualizations
-- Full drill-down expansion (metric → platform → segment → revenue)
-- Motion 150–250ms for state only
-
-## Principle
-
-Reduce visual complexity. Increase information density.
+- Generic sidebar + cards + charts layout substituting for UXMD screens
+- Intelligence machinery as navigation items
+- Implementation without GIS accessibility gate (ENG-23)

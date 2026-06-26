@@ -1,0 +1,7 @@
+# Frozen architecture corpus — require review for changes
+/docs/architecture/ @andre
+/docs/pdd/ @andre
+/docs/uxmd/ @andre
+/docs/sdd/ @andre
+/docs/governance/build-authorization-record-*.md @andre
+/docs/governance/build-authorization-checklist-v1.0.md @andre

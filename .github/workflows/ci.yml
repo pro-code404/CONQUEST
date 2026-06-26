@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  governance:
+    name: Architecture governance (Build-0)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify frozen corpus present
+        run: |
+          test -f docs/architecture/ARCHITECTURE-FREEZE.md
+          test -f docs/architecture/ccis.md
+          test -f docs/sdd/volume-v-engineering-standards-build-governance.md
+          test -f docs/governance/ci-law-mapping.md
+      - name: Verify Build Authorization Record issued
+        run: test -f docs/governance/build-authorization-record-build-0-2026-06-21.md
+      - name: Verify frozen corpus document count
+        run: |
+          test -f docs/uxmd/document-x-product-experience-operational-details.md
+          test -f docs/architecture/requirements-traceability-matrix.md
+
+  build:
+    name: Prototype compile and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm --filter './packages/**' --filter './services/**' run typecheck
+      - run: pnpm --filter './packages/**' --filter './services/**' run test

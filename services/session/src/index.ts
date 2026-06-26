@@ -11,7 +11,7 @@ export interface SessionState {
   version: number;
 }
 
-/** Session Manager — ephemeral + session state (WSDD §7) */
+/** Session Manager — ephemeral + session state (SDD-II / ADR-0017) */
 export class SessionManager {
   private readonly local = new Map<string, SessionState>();
 

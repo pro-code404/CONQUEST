@@ -1,83 +1,43 @@
 # Conquest
 
-**Adaptive Cognitive Intelligence Operating System (CIOS)**
+**Strategic Intelligence Operating System**
 
-Conquest is not a chatbot. It is a self-evolving cognitive operating system that processes every interaction through a ten-phase intelligence pipeline.
+Conquest is a cognitive operating system governed by a frozen architecture program. **Build-0 is authorized.**
 
-## Architecture
+## Authority chain
 
 ```
-docs/architecture/
-├── cognitive-pipeline.md    # What — the nervous system (10 phases)
-├── how-conquest-thinks.md   # How — reasoning, confidence, prediction
-└── how-conquest-evolves.md  # Evolution — self-improvement, routing, learning
+CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governance → Build Authorization → Build
 ```
+
+| Corpus | Path |
+|--------|------|
+| Architecture | [`docs/architecture/README.md`](docs/architecture/README.md) |
+| Product | [`docs/pdd/README.md`](docs/pdd/README.md) |
+| Experience | [`docs/uxmd/README.md`](docs/uxmd/README.md) |
+| Engineering | [`docs/sdd/README.md`](docs/sdd/README.md) |
+| Governance | [`docs/governance/build-0-authorization-package-v1.0.md`](docs/governance/build-0-authorization-package-v1.0.md) |
 
 See [`AGENTS.md`](AGENTS.md) for agent operating instructions.
 
-## Quick start
+## Prototype code (quarantined)
+
+`apps/`, `packages/`, and `services/` contain a **pre-authorization engineering spike**. See [`PROTOTYPE.md`](PROTOTYPE.md). Not authoritative. Not counted toward Build progress.
+
+## Local prototype (exploration only)
 
 ```bash
-# Install dependencies
 pnpm install
-
-# Start infrastructure
 pnpm docker:up
-
-# Build all packages
 pnpm build
-
-# Run tests
 pnpm test
-
-# Start API gateway
 pnpm dev
 ```
 
-## API
+## Implementation status
 
-```bash
-# Health check
-curl http://localhost:3000/health
-
-# Create auth token
-curl -X POST http://localhost:3000/v1/auth/token \
-  -H "Content-Type: application/json" \
-  -d '{"userId":"user-1"}'
-
-# Send request through cognitive pipeline
-curl -X POST http://localhost:3000/v1/conquest \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <token>" \
-  -d '{"text":"Explain black holes for a beginner"}'
-```
-
-## Monorepo structure
-
-```
-packages/
-  core/           Shared types, pipeline, evolution schemas
-  engines/        Cognitive phase implementations (10 phases + sub-engines)
-  observability/  Structured telemetry
-  config/         Environment configuration
-  database/       Drizzle schema (memory, sessions, evolution, audit)
-
-services/
-  orchestrator/   Pipeline runner — sole cross-service coordinator
-  memory/         Memory service (12 stores)
-  auth/           Authentication & authorization
-  session/        Session state management
-
-apps/
-  gateway/        API Gateway — Layer 1 Interface
-```
+**Build-0 authorized.** See [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) and [`docs/governance/build-authorization-record-build-0-2026-06-21.md`](docs/governance/build-authorization-record-build-0-2026-06-21.md).
 
 ## The First Law
 
 > Conquest is never finished. Every interaction is an opportunity to improve the operating system.
-
-Every response generates an invisible evolution record that updates routing, memory, and communication strategies — without autonomous code deployment.
-
-## Implementation status
-
-See [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) for complete capability tracking.

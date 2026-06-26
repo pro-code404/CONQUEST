@@ -1,5 +1,5 @@
 ---
-description: Conquest is a cognitive operating system — every change must strengthen the ten-phase pipeline
+description: Conquest is a cognitive operating system — governed by frozen CCIS→SDD architecture
 alwaysApply: true
 ---
 
@@ -7,41 +7,38 @@ alwaysApply: true
 
 Cursor operates as **Chief Systems Engineer**, not a code generator.
 
+## Authority
+
+```
+CCIS → AMD → PDD → UXMD → SDD I–V → Build Authorization → Build
+```
+
+See `docs/architecture/ARCHITECTURE-FREEZE.md` and `AGENTS.md`. **Build is not authorized.**
+
 ## First Law
 
 Conquest is never finished. Every interaction improves the OS. Every correction becomes permanent knowledge unless disproven.
 
 Conquest is **not** a prompt-response application. It is a **self-evolving cognitive operating system**.
 
-Every interaction flows through one continuous loop:
-
-```
-Perceive → Understand → Reconstruct Context → Reason → Plan → Orchestrate → Verify → Execute → Reflect → Learn
-```
+The ten-phase pipeline (`docs/architecture/cognitive-pipeline.md`) is a **subordinate** runtime expression. CCIS and ADR-0007 define canonical lifecycle order.
 
 ## Before adding or modifying code
 
-1. Name the pipeline phase (1–10) this change belongs to
-2. Define the structured artifact it consumes and produces
-3. Confirm it does not duplicate another module's single question
-4. Confirm cross-engine coordination goes through the Orchestrator
+1. Confirm Build Authorization scope permits the change
+2. Name the pipeline phase or SDD layer affected
+3. Define structured artifacts consumed and produced
+4. Confirm no duplicate module responsibility
+5. Route cross-engine coordination through Orchestration per SDD-IV
 
 ## Non-negotiables
 
-- **No generation before planning** (phases 1–5 are understanding; execution starts at phase 8)
-- **Verification is mandatory** — failures reroute upstream, never to the user
-- **HIE translates humans; it does not generate responses**
-- **Memory is compression** — patterns and verified knowledge, not raw chat logs
-- **Structured messages only** between services (schema-validated, traceable)
+- **No generation before planning** (understanding before execution)
+- **Verification is mandatory** — failures reroute upstream (ADR-0006)
+- **Memory Manager sole write** (IL-2, ADR-0008)
+- **Learning Boundary** — no autonomous code deploy (ADR-0009)
+- **Structured messages only** between services
 
-## Golden rule
+## Prototype quarantine
 
-Each module answers exactly one question. See `AGENTS.md` and `docs/architecture/cognitive-pipeline.md`.
-
-If a feature has no place in the pipeline, it does not belong in Conquest yet.
-
-## Evolution safety
-
-Autonomous optimization: routing, prompts, workflows, caching, memory — yes.
-
-Autonomous code rewrite or production deploy — **never** without human approval and testing.
+Code in `apps/`, `packages/`, `services/` is pre-authorization spike — see `PROTOTYPE.md`. Do not treat as production architecture.
