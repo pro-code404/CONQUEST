@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import type { ConquestDatabase } from "@conquest/database";
-import { memoryEntries, evolutionRecords, MEMORY_STORES, type MemoryStore } from "@conquest/database";
+import { memoryEntries, evolutionRecords, MEMORY_STORES, type MemoryStore as DbMemoryStore } from "@conquest/database";
 import type { MemoryDelta, EvolutionRecord } from "@conquest/core";
 import type { MemoryRetriever } from "@conquest/engines";
 
@@ -32,7 +32,7 @@ export class MemoryService implements MemoryRetriever {
       .map((e, i) => ({ id: `mem-${i}`, store: e.store, summary: e.summary }));
   }
 
-  async store(store: MemoryStore, key: string, value: unknown, confidence: number, userId?: string) {
+  async store(store: DbMemoryStore, key: string, value: unknown, confidence: number, userId?: string) {
     const summary = typeof value === "object" && value && "summary" in value
       ? String((value as { summary: string }).summary)
       : key;
@@ -47,7 +47,7 @@ export class MemoryService implements MemoryRetriever {
   async applyDelta(delta: MemoryDelta, userId?: string) {
     for (const update of delta.stores) {
       if (update.operation === "upsert" && update.value != null) {
-        await this.store(update.store as MemoryStore, update.key, update.value, update.confidence, userId);
+        await this.store(update.store as DbMemoryStore, update.key, update.value, update.confidence, userId);
       }
     }
   }
@@ -68,3 +68,7 @@ export class MemoryService implements MemoryRetriever {
     return MEMORY_STORES;
   }
 }
+
+export { MemoryPlatform, MEMORY_KINDS } from "./memory-platform/index.js";
+export type { MemoryKind, MemoryEntry, MemoryStore } from "./memory-platform/index.js";
+export { CognitiveMemoryManager } from "./cognitive-memory/cognitive-memory-manager.js";

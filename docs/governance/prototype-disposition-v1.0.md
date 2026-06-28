@@ -29,7 +29,30 @@ Per-area classifications below govern reuse decisions during Build.
 | Path | Class | Rationale |
 |------|-------|-----------|
 | `apps/gateway/` | **Discard before implementation** | Hono gateway + static preview demo; not UXMD-II application shell; `hono` resolution fails full workspace build; excluded from `scripts/build.mjs` |
-| `apps/gateway/public/preview.*` | **Reference-only** | Demo charts/data — not authoritative product UI |
+| `apps/gateway/public/preview.*` | **Reference-only** | Demo charts/data — not authoritative product UI; see [Chart reference patterns](#chart-reference-patterns-appsgatewaypublic) below |
+
+### Chart reference patterns (`apps/gateway/public`)
+
+Accepted as **reference-quality** for future production reimplementation only. **Do not invest Build-1 engineering effort** in this path unless required for validation.
+
+**Preserve concepts for production (GIS + React + Presentation + domain visualization services):**
+
+| Concept | Production target |
+|---------|-------------------|
+| Configurable chart options | Shared visualization configuration package |
+| Reusable rendering APIs | Presentation-layer chart components |
+| Improved SVG scaling | GIS-bound responsive SVG primitives |
+| Cleaner KPI layouts | Command Center / Analytics presentation modules |
+| Visualization patterns | Domain visualization services |
+
+**Do not carry forward:**
+
+- Large `innerHTML` rendering
+- Prototype-specific data generators
+- Hard-coded visualization constants
+- Direct DOM manipulation
+
+Reimplement under `@conquest/gis`, `@conquest/presentation`, and authorized domain services during Build-1+ milestones — not by extending `apps/gateway/public`.
 
 ---
 

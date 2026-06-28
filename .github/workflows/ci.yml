@@ -18,8 +18,16 @@ jobs:
           test -f docs/architecture/ccis.md
           test -f docs/sdd/volume-v-engineering-standards-build-governance.md
           test -f docs/governance/ci-law-mapping.md
-      - name: Verify Build Authorization Record issued
+      - name: Verify Build-0 Authorization Record issued
         run: test -f docs/governance/build-authorization-record-build-0-2026-06-21.md
+      - name: Verify Build-1 ops gate artifacts
+        run: |
+          test -f docs/operations/threat-model-review-v1.0.md
+          test -f docs/operations/tenant-isolation-test-plan-v1.0.md
+          test -f docs/operations/dr-drill-plan-v1.0.md
+          test -f docs/operations/runbooks/README.md
+      - name: Verify Build-1 Authorization Record issued
+        run: test -f docs/governance/build-authorization-record-build-1-2026-06-26.md
       - name: Verify frozen corpus document count
         run: |
           test -f docs/uxmd/document-x-product-experience-operational-details.md
@@ -39,5 +47,10 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm --filter './packages/**' --filter './services/**' run typecheck
-      - run: pnpm --filter './packages/**' --filter './services/**' run test
+      - run: pnpm typecheck
+      - run: pnpm test
+        env:
+          MEMORY_REPO: "true"
+      - name: Dependency audit (B-24)
+        run: pnpm audit --audit-level=high
+        continue-on-error: true

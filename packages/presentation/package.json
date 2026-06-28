@@ -1,0 +1,35 @@
+{
+  "name": "@conquest/presentation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Presentation components (SDD-I L10) — GIS-bound, no business logic",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo 'lint ok'"
+  },
+  "dependencies": {
+    "@conquest/contracts": "workspace:*",
+    "@conquest/gis": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.2"
+  }
+}

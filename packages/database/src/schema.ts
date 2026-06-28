@@ -98,3 +98,5 @@ export const MEMORY_STORES = [
 ] as const;
 
 export type MemoryStore = (typeof MEMORY_STORES)[number];
+
+export * from "./auth-schema.js";

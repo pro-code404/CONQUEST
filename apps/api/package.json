@@ -1,0 +1,27 @@
+{
+  "name": "@conquest/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Conquest platform API (auth, session)",
+  "scripts": {
+    "dev": "node --watch dist/server.js",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo 'lint ok'"
+  },
+  "dependencies": {
+    "@conquest/auth": "workspace:*",
+    "@conquest/config": "workspace:*",
+    "@conquest/contracts": "workspace:*",
+    "@conquest/database": "workspace:*",
+    "@conquest/gis": "workspace:*",
+    "@conquest/platform": "workspace:*",
+    "@hono/node-server": "^1.13.7",
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@conquest/platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo 'lint ok'"
+  },
+  "dependencies": {
+    "@conquest/ai-audit": "workspace:*",
+    "@conquest/ai-gateway": "workspace:*",
+    "@conquest/cache": "workspace:*",
+    "@conquest/cognitive": "workspace:*",
+    "@conquest/contracts": "workspace:*",
+    "@conquest/core": "workspace:*",
+    "@conquest/jobs": "workspace:*",
+    "@conquest/memory-service": "workspace:*",
+    "@conquest/performance": "workspace:*",
+    "@conquest/prompt-management": "workspace:*"
+  },
+  "devDependencies": {
+    "@conquest/prompt-security": "workspace:*",
+    "typescript": "^5.7.2"
+  }
+}

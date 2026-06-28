@@ -9,14 +9,15 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
     "lint": "echo 'lint ok'"
   },
   "dependencies": {
+    "@conquest/contracts": "workspace:*",
     "@conquest/core": "workspace:*",
     "@conquest/database": "workspace:*",
     "@conquest/engines": "workspace:*",
+    "@conquest/service-shared": "workspace:*",
     "drizzle-orm": "^0.38.3"
   },
-  "devDependencies": { "typescript": "^5.7.2", "vitest": "^2.1.8" }
+  "devDependencies": { "typescript": "^5.7.2" }
 }

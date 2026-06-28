@@ -74,3 +74,6 @@ export function createTraceId(): string {
 export function createRequestId(): string {
   return randomUUID();
 }
+
+export * from "./trace-context.js";
+export * from "./health.js";

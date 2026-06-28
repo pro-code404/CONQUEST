@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@conquest/contracts": ["packages/contracts/src/index.ts"],
+      "@conquest/core": ["packages/core/src/index.ts"],
+      "@conquest/database": ["packages/database/src/index.ts"],
+      "@conquest/engines": ["packages/engines/src/index.ts"],
+      "@conquest/gis": ["packages/gis/src/index.ts"],
+      "@conquest/observability": ["packages/observability/src/index.ts"],
+      "@conquest/presentation": ["packages/presentation/src/index.ts"],
+      "@conquest/auth": ["services/auth/src/index.ts"],
+      "@conquest/service-shared": ["services/shared/src/index.ts"],
+      "@conquest/session": ["services/session/src/index.ts"]
+    }
+  }
+}

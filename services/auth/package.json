@@ -9,12 +9,18 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
     "lint": "echo 'lint ok'"
   },
   "dependencies": {
+    "@conquest/contracts": "workspace:*",
     "@conquest/core": "workspace:*",
-    "@conquest/config": "workspace:*"
+    "@conquest/config": "workspace:*",
+    "@conquest/database": "workspace:*",
+    "@conquest/gis": "workspace:*",
+    "@conquest/service-shared": "workspace:*",
+    "drizzle-orm": "^0.38.3",
+    "postgres": "^3.4.5",
+    "zod": "^3.24.1"
   },
-  "devDependencies": { "typescript": "^5.7.2", "vitest": "^2.1.8" }
+  "devDependencies": { "typescript": "^5.7.2" }
 }

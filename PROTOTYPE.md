@@ -8,10 +8,10 @@
 
 ## Classification
 
-The following paths contain **prototype code** created before Architecture Freeze and Build Authorization:
+The following paths contain **prototype code** archived under `docs/archive/prototype/`:
 
-- `apps/` — API gateway and preview demo UI
-- `packages/` — core, engines, database, observability, config, ui
+- `docs/archive/prototype/apps/gateway/` — API gateway and preview demo UI
+- `docs/archive/prototype/packages/ui/` — pre-GIS design tokens
 - `services/` — orchestrator, memory, auth, session, shared
 - `docker-compose.yml`, `scripts/build.mjs`, root `package.json` workspace
 

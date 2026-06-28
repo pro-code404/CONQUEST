@@ -7,3 +7,4 @@ export * from "./evolution/index.js";
 export * from "./errors/index.js";
 export * from "./services/contract.js";
 export * from "./services/base-service.js";
+export * from "./security/tenant-scope.js";

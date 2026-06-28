@@ -4,16 +4,20 @@
   "private": true,
   "description": "Conquest — Adaptive Cognitive Intelligence Operating System",
   "license": "UNLICENSED",
+  "packageManager": "pnpm@9.15.4",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.0.0 <25.0.0",
+    "pnpm": ">=9.0.0"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "pnpm --filter @conquest/gateway dev",
-    "test": "pnpm -r run test",
+    "dev": "pnpm --filter @conquest/web... build && pnpm --parallel --filter @conquest/api --filter @conquest/web dev",
+    "dev:api": "pnpm --filter @conquest/api dev",
+    "test": "vitest run --config vitest.config.ts",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "lint": "pnpm -r run lint",
-    "typecheck": "pnpm -r run typecheck",
+    "typecheck": "pnpm --filter \"./packages/**\" --filter \"./services/**\" --filter \"./apps/api\" --filter \"./apps/web\" run typecheck",
+    "verify:build-0": "node scripts/verify-build-0.mjs",
     "db:generate": "pnpm --filter @conquest/database db:generate",
     "db:migrate": "pnpm --filter @conquest/database db:migrate",
     "docker:up": "docker compose up -d",

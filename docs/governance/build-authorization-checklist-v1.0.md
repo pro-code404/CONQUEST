@@ -4,9 +4,9 @@
 |-------|-------|
 | **Authority** | [SDD-V Part 11 §11.1–11.2](../sdd/volume-v-engineering-standards-build-governance.md) |
 | **Date** | 2026-06-21 |
-| **Build status** | **Build-0 AUTHORIZED** — [BAR-2026-06-21-001](build-authorization-record-build-0-2026-06-21.md) |
-| **Phase assessed** | Build-0 minimum gates |
-| **Last package** | [`build-0-authorization-package-v1.0.md`](build-0-authorization-package-v1.0.md) |
+| **Build status** | **Build-1 AUTHORIZED** — [BAR-2026-06-26-001](build-authorization-record-build-1-2026-06-26.md) |
+| **Phase assessed** | Build-0 + Build-1 gates |
+| **Last package** | [`build-1-authorization-package-v1.0.md`](build-1-authorization-package-v1.0.md) |
 
 > Evidence cited below. Re-verified 2026-06-21 for Engineering Transition Phase 0.
 
@@ -24,14 +24,14 @@
 |------|---------------------------|--------|----------------|
 | **B-01** | CCIS + frozen corpus current | **Complete** | Freeze v1.0; AMD I–IV; SDD-II v1.2; Document X v1.0 |
 | **B-02** | SDD Volumes I–V approved | **Complete** | Review checklists — all APPROVED (92–95%) |
-| **B-03** | RTM v1.1+ for Build-1 scope | **N/A Build-0** | RTM v1.1 exists (78 rows); not a Build-0 minimum gate |
+| **B-03** | RTM v1.1+ for Build-1 scope | **Complete** | RTM v1.1 — 78 rows; Part H Build-1 partition |
 | **B-04** | ADR-0001–0035 Accepted | **Complete** | `docs/architecture/adr/README.md` — 35 Accepted |
 | **B-05** | AMD I–II in repository | **Complete** | `amd/volume-i-*`, `amd/volume-ii-*` committed 2026-06-26 |
 | **B-06** | SDD-II v1.2 lifecycle errata | **Complete** | `volume-ii-data-intelligence-architecture.md` v1.2 — ADR-0007 aligned |
 | **B-07** | PDD Authority Bridge active | **Complete** | `pdd-volume-i-authority-bridge.md` v1.0 |
 | **B-08** | UXMD I–III + Document X approved | **Complete** | UXMD Final Review APPROVED FOR SDD; Document X v1.0 approved |
 | **B-09** | GIS binding plan for Presentation | **Complete** (plan) | SDD-V ENG-23; ADR-0012; UXMD-III GIS — **CI enforcement not built** |
-| **B-10** | Explicit Build Authorization issued | **Complete** | [`build-authorization-record-build-0-2026-06-21.md`](build-authorization-record-build-0-2026-06-21.md) |
+| **B-10** | Explicit Build Authorization issued | **Complete** | Build-0: BAR-2026-06-21-001; Build-1: [BAR-2026-06-26-001](build-authorization-record-build-1-2026-06-26.md) |
 
 ---
 
@@ -60,10 +60,10 @@
 | B-11 | Build-1+ | **Complete** — PDD-II v1.0 draft frozen |
 | B-12 | Build-2 | **Remaining** — PDD-I v2.1 open (Authority Bridge §3) |
 | B-13 | Build-1+ | **Remaining** — BH-1–BH-10 test plan not mapped to CI |
-| B-14–B-18 | Build-1 | **Remaining** — threat model, tenant tests, DR, runbooks not operational |
-| B-22–B-24 | Build-1+ | **Remaining** — contract tests, a11y gate, dependency policy |
+| B-14–B-18 | Build-1 | **Complete** — threat review, tenant test plan, ADR-0019, DR plan, runbooks |
+| B-22–B-24 | Build-1+ | **Remaining** — Milestone 1 (exception EX-B1-01 on draft BAR) |
 | B-25–B-28 | Build-2 | **Remaining** — stage-order golden tests, VRF bypass tests, etc. |
-| B-29–B-32 | Build-1 / Build-3 | **Remaining** — observability scaffold, kill switch, production gates |
+| B-29–B-32 | Build-1 / Build-3 | **B-29–B-30 Complete** — observability + kill switch scaffold; B-31–B-32 Build-3 |
 
 ---
 
@@ -72,8 +72,8 @@
 | Category | Count |
 |----------|-------|
 | **Build-0 Complete** | 13 (B-01–B-10, B-19–B-21) |
-| **Build-0 Remaining — Blocking** | 0 |
-| **Build-0 N/A** | 1 (B-03) |
+| **Build-1 Complete (pending BAR)** | 8 (B-14–B-18, B-29–B-30) + B-03 |
+| **Build-1 Remaining — BAR-blocking** | 1 (B-10 Build-1 BAR signature) |
 
 ### FAA P0 status
 
@@ -84,7 +84,7 @@
 
 ---
 
-**Build-0 authorized 2026-06-21.** Build-1+ requires separate BAR.
+**Build-0 complete 2026-06-26.** Build-1 package prepared — [`build-1-authorization-package-v1.0.md`](build-1-authorization-package-v1.0.md). Issue Build-1 BAR to authorize platform foundation.
 
 ---
 

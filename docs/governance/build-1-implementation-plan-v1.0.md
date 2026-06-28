@@ -5,7 +5,7 @@
 | **Phase** | Build-1 — Platform foundation (planning) |
 | **Prerequisite** | Build-0 stabilization + separate Build-1 BAR |
 | **Date** | 2026-06-21 |
-| **Status** | **PLANNING — NOT AUTHORIZED** |
+| **Status** | **AUTHORIZATION PACKAGE PREPARED — NOT ISSUED** |
 
 > This plan references the frozen architecture. It does not modify CCIS, AMD, PDD, UXMD, Document X, SDD, or ADRs.
 
@@ -13,7 +13,7 @@
 
 ## Purpose
 
-Prepare the engineering roadmap for visible product construction after Build-0. Build-1 requires additional gates (B-14–B-18, B-29–B-30) and a separate Build Authorization Record.
+Prepare the engineering roadmap for visible product construction after Build-0. Build-1 gates B-14–B-18 and B-29–B-30 are **complete** per [`build-1-authorization-package-v1.0.md`](build-1-authorization-package-v1.0.md). Awaiting Build-1 BAR signature.
 
 ---
 

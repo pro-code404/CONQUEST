@@ -214,11 +214,30 @@ See [ADR-0001](docs/architecture/adr/0001-document-authority-hierarchy.md) and [
 
 When documents conflict, the higher layer in the chain above prevails.
 
-**Build-0 authorized** per [`docs/governance/build-authorization-record-build-0-2026-06-21.md`](docs/governance/build-authorization-record-build-0-2026-06-21.md). Build-1+ requires separate BAR.
+**Build-1 authorized** per [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). Milestone 1 in progress.
 
-See [`docs/governance/build-0-status-v1.0.md`](docs/governance/build-0-status-v1.0.md) and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
+See [`docs/governance/build-1-milestone-1-plan-v1.0.md`](docs/governance/build-1-milestone-1-plan-v1.0.md) and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
 
-**Prototype code** in `apps/`, `packages/`, `services/` is quarantined — see [`PROTOTYPE.md`](PROTOTYPE.md).
+**Prototype code** has been archived to [`docs/archive/prototype/`](docs/archive/prototype/README.md) — see [`PROTOTYPE.md`](PROTOTYPE.md).
+
+---
+
+## Implementation standards (Build-1+)
+
+Apply incrementally as each subsystem is built:
+
+1. Centralize configuration and GIS tokens — no scattered colors, spacing, radii, timing, opacity, or sizing in feature code.
+2. Presentation components are rendering-only; business logic, orchestration, and intelligence stay in their SDD layers.
+3. Validate public inputs early; fail predictably.
+4. Prefer modular, testable units over monoliths.
+5. Cache or memoize expensive repeated computations.
+6. Follow repository formatting, naming, and documentation conventions.
+7. Avoid unnecessary global state; respect package boundaries and ENG-12.
+8. Public modules document their API and export only intended surfaces.
+9. Accessibility is mandatory per UXMD-III GIS (keyboard, screen readers, reduced motion, focus, contrast).
+10. Design for independent testability — pure functions where practical; RTM-verifiable.
+
+**Conquest-specific:** GIS for all visuals; no intelligence in Presentation; observability hooks on significant events; no architecture bypass — use ADR process for deficiencies.
 
 ---
 

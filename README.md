@@ -2,7 +2,7 @@
 
 **Strategic Intelligence Operating System**
 
-Conquest is a cognitive operating system governed by a frozen architecture program. **Build-0 is authorized.**
+Conquest is a cognitive operating system governed by a frozen architecture program. **Build-1 authorized.** Milestone 1 in progress.
 
 ## Authority chain
 
@@ -28,15 +28,13 @@ See [`AGENTS.md`](AGENTS.md) for agent operating instructions.
 
 ```bash
 pnpm install
-pnpm docker:up
-pnpm build
-pnpm test
-pnpm dev
+pnpm verify:build-0
+pnpm dev              # @conquest/web — authorized application shell
 ```
 
 ## Implementation status
 
-**Build-0 authorized.** See [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) and [`docs/governance/build-authorization-record-build-0-2026-06-21.md`](docs/governance/build-authorization-record-build-0-2026-06-21.md).
+**Build-1 authorized** — [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). Milestone 1 in progress.
 
 ## The First Law
 

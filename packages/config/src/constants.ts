@@ -1,0 +1,60 @@
+/** Centralized configuration constants — Phase 7F */
+
+export const API_CONSTANTS = {
+  DEFAULT_PAGE_SIZE: 50,
+  MAX_PAGE_SIZE: 200,
+  RATE_LIMIT_WINDOW_MS: 60_000,
+  RATE_LIMIT_MAX_REQUESTS: 120,
+  CORRELATION_HEADER: "x-correlation-id",
+  REQUEST_ID_HEADER: "x-request-id",
+} as const;
+
+export const SECURITY_CONSTANTS = {
+  RECOVERY_CODE_COUNT: 8,
+  RECOVERY_CODE_LENGTH: 12,
+  MFA_SECRET_BYTES: 20,
+  MIN_PASSWORD_LENGTH: 8,
+} as const;
+
+export const AUDIT_CONSTANTS = {
+  DEFAULT_LIMIT: 50,
+  MAX_LIMIT: 200,
+  EXPORT_PLACEHOLDER_MESSAGE: "Activity export will be available in a subsequent release.",
+} as const;
+
+export const AUTOMATION_GOVERNANCE_CONSTANTS = {
+  DEFAULT_MAX_CONCURRENT_RUNS: 5,
+  MAX_CONCURRENT_RUNS_CAP: 100,
+} as const;
+
+export const CACHE_CONSTANTS = {
+  DEFAULT_TTL_MS: 300_000,
+  MAX_TTL_MS: 86_400_000,
+  KEY_PREFIX: "conquest:cache:",
+} as const;
+
+export const JOB_CONSTANTS = {
+  DEFAULT_MAX_ATTEMPTS: 3,
+  DEFAULT_RETRY_DELAY_MS: 5_000,
+  MAX_RETRY_DELAY_MS: 300_000,
+  PROGRESS_MIN: 0,
+  PROGRESS_MAX: 100,
+  DEAD_LETTER_RETENTION_MS: 7 * 86_400_000,
+} as const;
+
+export const AI_GATEWAY_CONSTANTS = {
+  DEFAULT_TIMEOUT_MS: 60_000,
+  MAX_TIMEOUT_MS: 300_000,
+  DEFAULT_MAX_RETRIES: 2,
+  RETRY_BACKOFF_MS: 1_000,
+} as const;
+
+export const AI_AUDIT_CONSTANTS = {
+  LOG_PROMPT_CONTENT_DEFAULT: false,
+  MAX_TOOL_NAMES: 32,
+} as const;
+
+export const PERFORMANCE_CONSTANTS = {
+  SLOW_QUERY_THRESHOLD_MS: 500,
+  REQUEST_TIMING_HEADER: "x-response-time-ms",
+} as const;

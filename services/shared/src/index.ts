@@ -1,1 +1,12 @@
-export { BaseCognitiveService } from "@conquest/core";
+export { ApplicationServiceBase } from "./bases/application-service.js";
+export { AiServiceBase } from "./bases/ai-service.js";
+export { BaseCognitiveService, type TelemetryEmitter } from "./bases/cognitive-service.js";
+export { ExecutionServiceBase } from "./bases/execution-service.js";
+export { GatewayServiceBase } from "./bases/gateway-service.js";
+export { InfrastructureServiceBase } from "./bases/infrastructure-service.js";
+export { MemoryServiceBase } from "./bases/memory-service.js";
+export { createHealthResult } from "./health.js";
+export { telemetryFromCollector } from "./telemetry-bridge.js";
+export type { ServiceHealthResult } from "./types/health.js";
+export type { ServiceRequestContext } from "./types/service-context.js";
+export { SERVICE_NAMES, type ServiceName } from "@conquest/core";
