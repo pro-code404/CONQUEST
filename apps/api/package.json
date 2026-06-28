@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@conquest/auth": "workspace:*",
+    "@conquest/cache": "workspace:*",
     "@conquest/config": "workspace:*",
     "@conquest/contracts": "workspace:*",
     "@conquest/database": "workspace:*",
     "@conquest/gis": "workspace:*",
+    "@conquest/observability": "workspace:*",
+    "@conquest/performance": "workspace:*",
     "@conquest/platform": "workspace:*",
     "@hono/node-server": "^1.13.7",
     "hono": "^4.6.14"

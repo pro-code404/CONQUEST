@@ -1,7 +1,7 @@
 # Build-2 Implementation Roadmap
 
 **Strategy:** Integration-first — every milestone must leave Conquest more demonstrable than before.  
-**Baseline:** Phase 11 complete · 240 tests · Build-1 BAR active  
+**Baseline:** B2-M3 complete · 268 tests · Build-1 BAR active  
 **Companion:** [integration-matrix.md](./integration-matrix.md) · [production-blockers.md](./production-blockers.md)
 
 ---
@@ -20,7 +20,7 @@ Build-2 does **not** expand infrastructure unless it unblocks production. Implem
 |-----------|-------|-------------|-----------------|
 | **B2-M1** | Integration fixes + persistence foundation | Journey navigable; data survives restart | P0-01, P0-02, P0-08, P0-12 |
 | **B2-M2** | Real intelligence + Command Center | Credible recommendations in CC | P0-04, P0-03, P1-10 |
-| **B2-M3** | Production hardening | Staging-deployable | P0-05–09, P1-11–16 |
+| **B2-M3** | Production hardening | Staging-deployable | ~~P0-09, P1-11–16~~ **Complete** |
 | **B2-M4** | Closed-beta ready | Full demo script + E2E | P0-06–07, P0-11, P1-* |
 | **B2-M5** | Execution boundary (gated) | Approve → execute workflow | B-25–B-28, execution engine |
 

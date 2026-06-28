@@ -263,7 +263,7 @@ export function createPlatformServices(options: PlatformServicesOptions = {}): P
 
 
 export { createCacheProvider } from "./cache-provider-factory.js";
-
+export { createRedisClient } from "./redis-client.js";
 export { getPlatformHealthReport, getCognitiveMetricsSnapshot } from "./platform-health.js";
 
 export type { PlatformHealthDeps } from "./platform-health.js";

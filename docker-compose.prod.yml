@@ -1,0 +1,58 @@
+# Production stack — API, Web, PostgreSQL, Redis
+# Usage: copy .env.production.example to .env and run:
+#   docker compose -f docker-compose.prod.yml up --build
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: conquest
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-conquest}
+      POSTGRES_DB: conquest
+    volumes:
+      - conquest_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U conquest"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      NODE_ENV: production
+      CONQUEST_PROFILE: production
+      CONQUEST_API_PORT: "3001"
+      DATABASE_URL: postgresql://conquest:${POSTGRES_PASSWORD:-conquest}@postgres:5432/conquest
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      CONQUEST_API_KEY: ${CONQUEST_API_KEY}
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:8080}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:8080}
+      EMAIL_PROVIDER: ${EMAIL_PROVIDER:-console}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+
+volumes:
+  conquest_pg_data:

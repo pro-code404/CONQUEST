@@ -1,10 +1,10 @@
 # Build-2 Launch Readiness Report
 
 **Audience:** Closed-beta preparation  
-**Baseline:** B2-M2 Production Persistence complete · 257 tests · Build-1 BAR active  
-**Date:** 2026-06-28 (updated post-M2)
+**Baseline:** B2-M3 Production Hardening complete · 263+ tests · Build-1 BAR active  
+**Date:** 2026-06-21 (updated post-M3)
 
-> **M2 delta:** Demo readiness ~85% (was ~78%). Postgres persistence, email delivery audit, legal acceptance. See [m2-production-persistence-report.md](./m2-production-persistence-report.md).
+> **M3 delta:** Demo readiness ~92% (was ~85%). Docker compose, env validation, ops status, rate limit enforcement, backup hooks. See [production-acceptance-report.md](./production-acceptance-report.md).
 
 ---
 
@@ -40,7 +40,7 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 | Logout | Yes | — | Session revoked |
 | Reconnect / session restored | Yes | Low | Login + cookie restore; sessions durable in Postgres (M2) |
 
-**Overall demo readiness: ~85%** — persistence, integration, email audit, and legal flows are strong; SMTP provider and enforcing rate limits remain primary blockers.
+**Overall demo readiness: ~92%** — deployment layer, observability, and security hardening complete; SMTP provider and E2E tests remain primary blockers.
 
 ---
 

@@ -26,10 +26,16 @@ import {
   type RepositoryMode,
 } from "@conquest/auth";
 import { createPlatformServices, getPlatformHealthReport, getCognitiveMetricsSnapshot } from "@conquest/platform";
-import { toStructuredError } from "@conquest/config";
+import { toStructuredError, validateApiEnvironment, API_CONSTANTS, type ValidatedApiEnv } from "@conquest/config";
+import { OperationalMetricsCollector } from "@conquest/performance";
+import type { RedisLikeClient } from "@conquest/cache";
 import { SetOnboardingStageSchema } from "@conquest/contracts";
 import { correlationIdMiddleware } from "./middleware/correlation-id.js";
-import { rateLimitMiddleware } from "./middleware/rate-limit.js";
+import { createRateLimitMiddleware, type RateLimitEvent } from "./middleware/rate-limit.js";
+import { securityHeadersMiddleware } from "./middleware/security-headers.js";
+import { requestTimingMiddleware } from "./middleware/request-timing.js";
+import { buildOperationalStatus } from "./operational-status.js";
+import { securityAuditMiddleware } from "./middleware/security-audit.js";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -58,7 +64,17 @@ async function cognitiveScope(repo: AuthRepository, sessionId: string, workspace
   return { orgId: session.orgId, workspaceId };
 }
 
-export async function createApiApp(deps?: { repo?: AuthRepository; persistenceMode?: RepositoryMode }) {
+export interface CreateApiAppDeps {
+  repo?: AuthRepository;
+  persistenceMode?: RepositoryMode;
+  apiEnv?: ValidatedApiEnv;
+  redisClient?: RedisLikeClient;
+}
+
+export async function createApiApp(deps?: CreateApiAppDeps) {
+  const apiEnv = deps?.apiEnv ?? validateApiEnvironment();
+  const opsMetrics = new OperationalMetricsCollector();
+  const rateLimitEvents: RateLimitEvent[] = [];
   let repo: AuthRepository;
   let persistenceMode: RepositoryMode;
   if (deps?.repo) {
@@ -79,7 +95,9 @@ export async function createApiApp(deps?: { repo?: AuthRepository; persistenceMo
   const automation = new AutomationService(repo);
   const security = new SecurityService(repo);
   const audit = new AuditService(repo);
-  const platform = createPlatformServices();
+  const platform = deps?.redisClient
+    ? createPlatformServices({ redisClient: deps.redisClient })
+    : createPlatformServices();
 
   const cognitiveProvider: IntelligenceCognitiveProvider = {
     async analyze(scope, input) {
@@ -132,11 +150,14 @@ export async function createApiApp(deps?: { repo?: AuthRepository; persistenceMo
   const app = new Hono();
 
   app.use("*", correlationIdMiddleware);
+  app.use("*", securityHeadersMiddleware(apiEnv.profile === "production"));
+  app.use("*", requestTimingMiddleware);
+  app.use("/api/*", securityAuditMiddleware);
   app.use(
     "/api/*",
-    rateLimitMiddleware,
+    createRateLimitMiddleware(opsMetrics, rateLimitEvents),
     cors({
-      origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+      origin: apiEnv.corsOrigins,
       credentials: true,
     }),
   );
@@ -183,6 +204,24 @@ export async function createApiApp(deps?: { repo?: AuthRepository; persistenceMo
     } catch {
       return c.json({ ok: false, persistence: persistenceMode }, 503);
     }
+  });
+
+  app.get("/api/ops/status", async (c) => {
+    opsMetrics.setCacheMetrics(platform.cache.getMetrics().hits, platform.cache.getMetrics().misses);
+    const jobMetrics = platform.jobs.getMetrics();
+    opsMetrics.setJobMetrics(jobMetrics.queued, jobMetrics.completed, jobMetrics.failed);
+    const status = await buildOperationalStatus({
+      platform,
+      repo,
+      persistenceMode,
+      profile: apiEnv.profile,
+      rateLimitEvents,
+      operationalMetrics: opsMetrics.snapshot({
+        windowMs: API_CONSTANTS.RATE_LIMIT_WINDOW_MS,
+        maxRequests: API_CONSTANTS.RATE_LIMIT_MAX_REQUESTS,
+      }),
+    });
+    return c.json(status);
   });
 
   app.get("/api/legal/documents", (c) => c.json(legal.getPublicStatus()));

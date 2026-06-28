@@ -815,3 +815,54 @@ describe("Build-2 Milestone 1 integration", () => {
     expect(res.status).toBe(200);
   });
 });
+
+describe("M3 operational endpoints", () => {
+  let ctx: ApiContext;
+
+  beforeEach(async () => {
+    ctx = await createTestApi();
+  });
+
+  it("returns consolidated ops status", async () => {
+    const res = await ctx.app.request("/api/ops/status");
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      service: string;
+      overall: string;
+      metrics: { operational: { rateLimit: { maxRequests: number } } };
+      database: { mode: string };
+    };
+    expect(body.service).toBe("conquest-api");
+    expect(body.overall).toBeDefined();
+    expect(body.metrics.operational.rateLimit.maxRequests).toBeGreaterThan(0);
+    expect(body.database.mode).toBe("memory");
+  });
+
+  it("enforces rate limiting with 429", async () => {
+    const prevNode = process.env.NODE_ENV;
+    const prevVitest = process.env.VITEST;
+    process.env.NODE_ENV = "development";
+    delete process.env.VITEST;
+    const isolated = await createTestApi();
+    const { API_CONSTANTS } = await import("@conquest/config");
+    const max = API_CONSTANTS.RATE_LIMIT_MAX_REQUESTS;
+    let lastStatus = 200;
+    for (let i = 0; i <= max + 2; i++) {
+      const res = await isolated.app.request("/api/health/live", {
+        headers: { "x-forwarded-for": "203.0.113.99" },
+      });
+      lastStatus = res.status;
+    }
+    expect(lastStatus).toBe(429);
+    process.env.NODE_ENV = prevNode;
+    if (prevVitest !== undefined) process.env.VITEST = prevVitest;
+  });
+
+  it("includes security and trace headers", async () => {
+    const res = await ctx.app.request("/api/health/live");
+    expect(res.headers.get("x-correlation-id")).toBeTruthy();
+    expect(res.headers.get("x-request-id")).toBeTruthy();
+    expect(res.headers.get("x-trace-id")).toBeTruthy();
+    expect(res.headers.get("x-content-type-options")).toBe("nosniff");
+  });
+});

@@ -8,3 +8,4 @@ export { CognitiveMetricsCollector } from "./cognitive-metrics-collector.js";
 export { PlatformMetricsCollector } from "./metrics-collector.js";
 export { withRequestTiming, timingHeader, type RequestTimingResult } from "./request-timing.js";
 export { aggregatePlatformHealth, type DependencyHealthInput } from "./health-aggregation.js";
+export { OperationalMetricsCollector, type OperationalMetricsSnapshot } from "./operational-metrics.js";

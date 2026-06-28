@@ -25,3 +25,4 @@ export async function runMigrations(connectionString: string): Promise<void> {
 }
 
 export { migrationsFolder };
+export * from "./backup.js";

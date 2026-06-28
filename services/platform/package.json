@@ -21,7 +21,8 @@
     "@conquest/jobs": "workspace:*",
     "@conquest/memory-service": "workspace:*",
     "@conquest/performance": "workspace:*",
-    "@conquest/prompt-management": "workspace:*"
+    "@conquest/prompt-management": "workspace:*",
+    "redis": "^4.7.0"
   },
   "devDependencies": {
     "@conquest/prompt-security": "workspace:*",

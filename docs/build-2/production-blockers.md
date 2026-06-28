@@ -1,7 +1,7 @@
 # Build-2 Production Blocker List
 
 **Prioritized tracked work** — missing production requirements, not future assumptions.  
-**Baseline:** B2-M2 complete · 257 tests · 2026-06-28
+**Baseline:** B2-M3 complete · 263+ tests · 2026-06-21
 
 ---
 
@@ -34,7 +34,7 @@
 
 | ID | Blocker | Domain | Verification |
 |----|---------|--------|--------------|
-| B2-P0-09 | Rate limiting sets headers only — does not block | Security | 429 returned on threshold |
+| B2-P0-09 | Rate limiting sets headers only — does not block | Security | ~~429 returned~~ **Resolved M3** — `createRateLimitMiddleware` enforces threshold |
 | B2-P0-10 | Sessions in-memory — not durable across instances | Security | ~~Session survives restart~~ **Resolved M2** — `auth_server_sessions` in Postgres when `DATABASE_URL` set |
 
 ### Demonstration
@@ -67,8 +67,8 @@
 
 | ID | Blocker | Domain |
 |----|---------|--------|
-| B2-P1-11 | `REDIS_URL` not passed to platform bootstrap | Scaling |
-| B2-P1-12 | Jobs use in-memory store only | Scaling |
+| B2-P1-11 | `REDIS_URL` not passed to platform bootstrap | Scaling | ~~Wired~~ **Resolved M3** — `server.ts` → `createPlatformServices` |
+| B2-P1-12 | Jobs use in-memory store only | Scaling | Partial — metrics exposed; Redis job store deferred |
 | B2-P1-13 | AI providers are stubs | AI |
 | B2-P1-14 | RLS not enforced at database layer (no DB yet) | Security |
 | B2-P1-15 | Secrets management not production-configured | Security |
@@ -77,9 +77,9 @@
 
 | ID | Blocker | Domain |
 |----|---------|--------|
-| B2-P1-16 | Distributed tracing not wired (`runWithTraceContext`) | Observability |
+| B2-P1-16 | Distributed tracing not wired (`runWithTraceContext`) | Observability | ~~Resolved M3** — correlation middleware |
 | B2-P1-17 | Web telemetry is dev console only | Observability |
-| B2-P1-18 | Backup/restore not validated against Postgres | DR |
+| B2-P1-18 | Backup/restore not validated against Postgres | DR | ~~Partial M3** — `BackupProvider` + scheduler |
 | B2-P1-19 | Load test scaffold not connected to deployed API | Performance |
 
 ### Legal & compliance
