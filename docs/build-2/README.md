@@ -18,10 +18,11 @@ Build-2 prioritizes **production readiness** over feature count. Every task must
 | 4 | [Implementation Roadmap](./implementation-roadmap.md) | Complete — M5 gated |
 | 5 | [Simulation Inventory](./simulation-inventory.md) | **Authoritative** — post M4 |
 | 6 | [Recovery Phase 2 Report](./recovery-phase-2-report.md) | **Complete** — knowledge sync |
-| 7 | [Institutional Memory Coverage](../institutional-memory/documentation-coverage-report.md) | **Complete** — Phase 4 · 97.2% |
-| 8 | [M4 Closed Beta Completion Report](./m4-closed-beta-completion-report.md) | Complete |
-| 9 | [Database Health Report](./database-health-report.md) | Updated M4 |
-| 10 | [M1–M3 milestone reports](./m1-integration-batch-report.md) | Historical snapshots |
+| 7 | [CI Stabilization Report](./ci-stabilization-report.md) | **Complete** — Phase 4.5 pnpm fix |
+| 8 | [Institutional Memory Coverage](../institutional-memory/documentation-coverage-report.md) | **Complete** — Phase 4 · 97.2% |
+| 9 | [M4 Closed Beta Completion Report](./m4-closed-beta-completion-report.md) | Complete |
+| 10 | [Database Health Report](./database-health-report.md) | Updated M4 |
+| 11 | [M1–M3 milestone reports](./m1-integration-batch-report.md) | Historical snapshots |
 
 ---
 
