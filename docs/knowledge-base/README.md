@@ -8,6 +8,8 @@ Facts reflect the codebase **post Build-2 M4** + Recovery Phase 4.
 
 **Project Brain** (`docs/project-brain/`) is the supreme engineering memory entry point.
 
+**Institutional memory** (`docs/institutional-memory/`) is the cognitive preservation layer — read after Project Brain Chapter 18.
+
 This knowledge base **summarizes** frozen architecture and operational detail; it does not override CCIS/ADR or Project Brain on identity.
 
 ```
