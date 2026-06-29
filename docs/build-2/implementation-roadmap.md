@@ -1,7 +1,7 @@
 # Build-2 Implementation Roadmap
 
 **Strategy:** Integration-first — every milestone must leave Conquest more demonstrable than before.  
-**Baseline:** B2-M3 complete · 268 tests · Build-1 BAR active  
+**Baseline:** B2-M4 complete · 278 tests · Build-1 BAR active  
 **Companion:** [integration-matrix.md](./integration-matrix.md) · [production-blockers.md](./production-blockers.md)
 
 ---

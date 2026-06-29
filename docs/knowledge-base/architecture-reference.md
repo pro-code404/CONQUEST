@@ -215,7 +215,7 @@ Wires Redis cache when `REDIS_URL` present; falls back to in-memory.
 | **Purpose** | Async cognitive runs, retries, dead-letter queue |
 | **Code** | `services/jobs` — `JobService`, `RedisJobStore`, `RedisDeadLetterQueue`, in-memory fallback |
 | **ADRs** | [0010](../architecture/adr/0010-event-driven-architecture.md) |
-| **Status** | In Progress (Redis bootstrap in M4) |
+| **Status** | Implemented — Redis when `REDIS_URL` set; in-memory CI fallback |
 
 `createJobService({ redisUrl })` selects queue backend at startup.
 
@@ -242,7 +242,7 @@ Wires Redis cache when `REDIS_URL` present; falls back to in-memory.
 | **Purpose** | Transactional email: verify, invite, password reset |
 | **Code** | `NotificationService`, `createEmailProvider()` — Resend, SMTP (nodemailer), console |
 | **Env** | `EMAIL_PROVIDER`, `RESEND_API_KEY`, SMTP_* vars |
-| **Status** | In Progress (M4 production providers) |
+| **Status** | Implemented — Resend, SMTP, console providers (M4) |
 
 Retry wrapper: `RetryingEmailProvider` with `EMAIL_CONSTANTS`.
 
@@ -321,7 +321,7 @@ Retry wrapper: `RetryingEmailProvider` with `EMAIL_CONSTANTS`.
 |---|---|
 | **Purpose** | Session manager abstraction (companion to auth repository) |
 | **Code** | `services/session` |
-| **Status** | In Progress (Postgres adapter wiring per Build-2 roadmap) |
+| **Status** | Partial — sessions durable via Drizzle repo; dedicated adapter optional |
 
 ---
 

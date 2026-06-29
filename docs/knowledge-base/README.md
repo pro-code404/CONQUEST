@@ -1,10 +1,14 @@
 # Conquest Knowledge Base
 
-Authoritative, maintainable reference for engineers, operators, and AI agents working on Conquest. Facts reflect the codebase **post Build-2 M4** (June 2026): Postgres persistence, Redis job queue with in-memory fallback, Resend/SMTP email, 270+ Vitest tests, Playwright e2e, `docker-compose.prod.yml`.
+Operational reference for engineers and AI agents. **For identity, intent, and complete reconstruction, read [Project Brain](../project-brain/README.md) first.**
+
+Facts reflect the codebase **post Build-2 M4** + Recovery Phase 3.
 
 ## Document authority
 
-This knowledge base **summarizes** frozen architecture; it does not override it.
+**Project Brain** (`docs/project-brain/`) is the supreme engineering memory entry point.
+
+This knowledge base **summarizes** frozen architecture and operational detail; it does not override CCIS/ADR or Project Brain on identity.
 
 ```
 CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governance → Build Authorization
@@ -16,6 +20,12 @@ When this KB conflicts with [`docs/architecture/`](../architecture/) or an ADR, 
 
 | # | Document | Purpose |
 |---|----------|---------|
+| **0** | [**Project Brain**](../project-brain/README.md) | **Supreme engineering memory — read first** |
+| **M** | [conquest-complete-reference.md](./conquest-complete-reference.md) | Single largest technical reference (architecture, modules, builds) |
+| **M** | [engineering-constitution.md](./engineering-constitution.md) | Permanent engineering rules — never bypass boundaries |
+| **M** | [development-memory.md](./development-memory.md) | Institutional memory — decisions, rejections, build evolution |
+| **M** | [production-architecture.md](./production-architecture.md) | Deploy topology, ops, scaling, DR, env vars |
+| **M** | [product-master-spec.md](./product-master-spec.md) | Authoritative merged product specification |
 | 1 | [system-overview.md](./system-overview.md) | Architecture, monorepo layout, request lifecycle, service interactions, layer boundaries |
 | 2 | [product-knowledge.md](./product-knowledge.md) | What Conquest is/is not, mission, Build-1/2 summary, roadmap, status labels |
 | 3 | [architecture-reference.md](./architecture-reference.md) | Subsystem catalog: auth, workspace, automation, research, intelligence, cognitive, memory, AI, ops, etc. |
@@ -26,7 +36,7 @@ When this KB conflicts with [`docs/architecture/`](../architecture/) or an ADR, 
 | 8 | [adr-index.md](./adr-index.md) | Readable index of ADRs 0001–0038 (titles + one-line summaries) |
 | 9 | [development-guide.md](./development-guide.md) | Local run, test, deploy, debug, CI, migrations, Docker, Redis, Postgres |
 | 10 | [agent-handbook.md](./agent-handbook.md) | Resume guide for AI agents: goals, standards, blockers, patterns |
-| 11 | [conquest-master-spec.md](./conquest-master-spec.md) | Highest-level consolidated spec with cross-refs to PDD, SDD, UXMD, Build-2, governance |
+| 11 | [conquest-master-spec.md](./conquest-master-spec.md) | Legacy consolidated spec — **prefer [product-master-spec.md](./product-master-spec.md)** |
 
 ## Related corpora
 
@@ -39,7 +49,7 @@ When this KB conflicts with [`docs/architecture/`](../architecture/) or an ADR, 
 | PDD | [`docs/pdd/`](../pdd/) |
 | SDD | [`docs/sdd/`](../sdd/) |
 | UXMD | [`docs/uxmd/`](../uxmd/) |
-| Build-2 program | [`docs/build-2/`](../build-2/) |
+| Build-2 program | [`docs/build-2/`](../build-2/) — [recovery-phase-2-report](../build-2/recovery-phase-2-report.md) |
 | Governance / BAR | [`docs/governance/`](../governance/) |
 | Operations | [`docs/operations/`](../operations/) |
 | Agent instructions | [`AGENTS.md`](../../AGENTS.md) |
@@ -57,4 +67,4 @@ When this KB conflicts with [`docs/architecture/`](../architecture/) or an ADR, 
 | Tests | 278 Vitest unit/integration; Playwright e2e (`pnpm test:e2e`) |
 | Demo readiness | ~96% (closed-beta target per Build-2 M4) |
 
-*Last updated: Build-2 M4 baseline, 2026-06-21.*
+*Last updated: Build-2 M4 complete + Recovery Phase 2 sync, 2026-06-21.*

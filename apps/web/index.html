@@ -6,7 +6,25 @@
     <title>Conquest</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main
+        id="boot-splash"
+        style="
+          min-height: 100vh;
+          margin: 0;
+          padding: 2rem;
+          background: #0f1419;
+          color: #f4f6f8;
+          font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+        "
+      >
+        <p style="color: #3b82f6; font-weight: 600; margin: 0 0 0.5rem">Conquest</p>
+        <h1 style="font-size: 1.25rem; margin: 0 0 0.5rem">Loading application…</h1>
+        <p style="color: #9aa5b4; margin: 0">
+          If this message does not disappear, ensure the API is running on port 3001.
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

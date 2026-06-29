@@ -26,7 +26,23 @@ function useSessionOnNavigate(): { user: ReturnType<typeof useAuth>["user"]; che
 
 function GuardOutlet({ access }: { access: RouteAccessResult }) {
   if (access.status === "loading") {
-    return <p role="status">Loading session…</p>;
+    return (
+      <main
+        role="status"
+        style={{
+          minHeight: "100vh",
+          padding: "2rem",
+          background: "var(--cq-color-surface, #0f1419)",
+          color: "var(--cq-color-text-primary, #f4f6f8)",
+          fontFamily: "var(--cq-font-family, system-ui, sans-serif)",
+        }}
+      >
+        <p style={{ color: "var(--cq-color-accent, #3b82f6)", fontWeight: 600, margin: "0 0 0.5rem" }}>
+          Conquest
+        </p>
+        <p style={{ margin: 0 }}>Loading session…</p>
+      </main>
+    );
   }
   if (access.redirectTo) {
     return <Navigate to={access.redirectTo} replace />;

@@ -2,7 +2,21 @@
 
 **Strategic Intelligence Operating System**
 
-Conquest is a cognitive operating system governed by a frozen architecture program. **Build-1 authorized.** Milestone 1 in progress.
+Conquest is a cognitive operating system governed by a frozen architecture program and an integration-first Build-2 engineering program.
+
+## Current status (authoritative)
+
+| Item | Value |
+|------|-------|
+| **Build program** | Build-2 complete through **M4** (closed-beta readiness) |
+| **Build authorization** | Build-1 BAR issued ([BAR-2026-06-26-001](docs/governance/build-authorization-record-build-1-2026-06-26.md)) |
+| **Tests** | 278 Vitest + Playwright e2e (CI) |
+| **Closed-beta readiness** | ~96% |
+| **Next milestone** | Build-2 M5 (execution boundary — gated) |
+
+**Start here (everyone):** [`docs/project-brain/README.md`](docs/project-brain/README.md) — **Project Brain** (supreme engineering memory)
+
+**Quick start (engineers & AI agents):** [`docs/knowledge-base/ai-agent-onboarding.md`](docs/knowledge-base/ai-agent-onboarding.md)
 
 ## Authority chain
 
@@ -12,29 +26,36 @@ CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governanc
 
 | Corpus | Path |
 |--------|------|
-| Architecture | [`docs/architecture/README.md`](docs/architecture/README.md) |
+| **Project Brain (start here)** | [`docs/project-brain/README.md`](docs/project-brain/README.md) |
+| Knowledge base (operational reference) | [`docs/knowledge-base/README.md`](docs/knowledge-base/README.md) |
+| Architecture (frozen) | [`docs/architecture/README.md`](docs/architecture/README.md) |
 | Product | [`docs/pdd/README.md`](docs/pdd/README.md) |
 | Experience | [`docs/uxmd/README.md`](docs/uxmd/README.md) |
 | Engineering | [`docs/sdd/README.md`](docs/sdd/README.md) |
-| Governance | [`docs/governance/build-0-authorization-package-v1.0.md`](docs/governance/build-0-authorization-package-v1.0.md) |
+| Build-2 tracking | [`docs/build-2/`](docs/build-2/) — [Recovery Phase 3](docs/project-brain/recovery-phase-3-validation.md) |
+| Governance | [`docs/governance/`](docs/governance/) |
 
-See [`AGENTS.md`](AGENTS.md) for agent operating instructions.
+See [`AGENTS.md`](AGENTS.md) for Chief Systems Engineer instructions.
 
-## Prototype code (quarantined)
+## Implementation (authorized)
 
-`apps/`, `packages/`, and `services/` contain a **pre-authorization engineering spike**. See [`PROTOTYPE.md`](PROTOTYPE.md). Not authoritative. Not counted toward Build progress.
+`apps/`, `packages/`, and `services/` contain the **authorized Build-1/2 implementation** — not a quarantined spike. Historical pre-GIS prototype code lives under [`docs/archive/prototype/`](docs/archive/prototype/). See [`PROTOTYPE.md`](PROTOTYPE.md).
 
-## Local prototype (exploration only)
+## Local development
 
 ```bash
 pnpm install
-pnpm verify:build-0
-pnpm dev              # @conquest/web — authorized application shell
+pnpm build
+pnpm dev              # API + web
+pnpm test             # 278 unit/integration tests
+pnpm test:e2e         # Playwright closed-beta journey (install Chromium first)
 ```
 
-## Implementation status
+Infrastructure only: `pnpm docker:up` (Postgres + Redis)
 
-**Build-1 authorized** — [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). Milestone 1 in progress.
+Production stack: `docker compose -f docker-compose.prod.yml up --build`
+
+Detail: [`docs/knowledge-base/development-guide.md`](docs/knowledge-base/development-guide.md)
 
 ## The First Law
 

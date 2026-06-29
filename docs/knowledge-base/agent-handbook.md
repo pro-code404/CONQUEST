@@ -1,6 +1,6 @@
 # Agent Handbook
 
-Resume guide for AI agents (and engineers) working on Conquest. Cross-reference: [`AGENTS.md`](../../AGENTS.md) · [system-overview](./system-overview.md) · [development-guide](./development-guide.md)
+Resume guide for AI agents (and engineers) working on Conquest. Cross-reference: [`AGENTS.md`](../../AGENTS.md) · [**ai-agent-onboarding**](./ai-agent-onboarding.md) · [system-overview](./system-overview.md) · [development-guide](./development-guide.md)
 
 ## Mission (read first)
 
@@ -20,13 +20,13 @@ CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governanc
 4. Confirm no duplicate module responsibility
 5. Route cross-engine work through Orchestration (SDD-IV)
 
-**Build-1 BAR active.** Build-2 integration-first program in progress. See [product-knowledge](./product-knowledge.md).
+**Build-1 BAR active.** Build-2 M4 complete. See [product-knowledge](./product-knowledge.md).
 
-## Current build status (~92%)
+## Current build status (B2-M4 complete)
 
 | Metric | Value |
 |--------|-------|
-| Demo readiness | ~96% closed-beta (post B2-M4) |
+| Demo readiness | ~96% closed-beta |
 | Tests | 278 Vitest; Playwright e2e (`pnpm test:e2e`) |
 | API routes | 100 in `apps/api/src/app.ts` |
 | Persistence | Postgres via `DATABASE_URL`; `MEMORY_REPO=true` in CI |
@@ -118,9 +118,9 @@ Inject test deps via `createApiApp({ repo, persistenceMode, jobService })` in `a
 
 | ID | Blocker | Status |
 |----|---------|--------|
-| B2-P0-03 | Production email delivery | Partial — Resend/SMTP in M4; verify env config |
-| B2-P1-03 | Automation execution | Deferred — run is audit-only |
-| B2-P1-04 | Full E2E demo journey | In Progress — Playwright expanding |
+| B2-P0-03 | Production email delivery | **Resolved M4** — Resend/SMTP; verify env in staging |
+| B2-P1-03 | Automation execution | Deferred — run is audit-only (M5 gated) |
+| B2-P1-04 | Full E2E demo journey | **Resolved M4** — Playwright in CI |
 | B2-P1-05 | Analytics visualization | Deferred |
 | B2-P2-01 | Knowledge/Strategy/Marketplace | Planned placeholders |
 | B2-P2-03 | Privacy export/deletion jobs | Deferred |
@@ -156,7 +156,7 @@ Full list: [`docs/build-2/production-blockers.md`](../build-2/production-blocker
 | Knowledge base index | [README.md](./README.md) |
 | API catalog | [api-reference.md](./api-reference.md) |
 | ADR index | [adr-index.md](./adr-index.md) |
-| Master spec | [conquest-master-spec.md](./conquest-master-spec.md) |
+| Master spec | [product-master-spec.md](./product-master-spec.md) (authoritative) · [conquest-master-spec.md](./conquest-master-spec.md) (legacy summary) |
 | Cognitive pipeline | [`docs/architecture/cognitive-pipeline.md`](../architecture/cognitive-pipeline.md) |
 | Build-2 roadmap | [`docs/build-2/implementation-roadmap.md`](../build-2/implementation-roadmap.md) |
 | RTM | [`docs/architecture/requirements-traceability-matrix.md`](../architecture/requirements-traceability-matrix.md) |
@@ -165,7 +165,7 @@ Full list: [`docs/build-2/production-blockers.md`](../build-2/production-blocker
 
 When picking up work in a new session:
 
-1. Read this handbook + [product-knowledge](./product-knowledge.md) status table
+1. Read [**ai-agent-onboarding**](./ai-agent-onboarding.md) + this handbook + [product-knowledge](./product-knowledge.md) status table
 2. Check [`docs/build-2/production-blockers.md`](../build-2/production-blockers.md)
 3. Run `pnpm build && pnpm test` to establish baseline
 4. Confirm which BAR milestone your task belongs to

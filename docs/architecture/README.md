@@ -6,7 +6,7 @@ The architecture of Conquest is documented in layers of understanding and govern
 
 **[`final-architecture-audit-v1.0.md`](final-architecture-audit-v1.0.md)** — v1.0 (2026-06-21)
 
-**Verdict:** Architecture Transition Program complete. **Build-0 authorized** — [`../governance/build-authorization-record-build-0-2026-06-21.md`](../governance/build-authorization-record-build-0-2026-06-21.md).
+**Verdict:** Architecture Transition Program complete. **Build-0 complete** — [`../governance/build-authorization-record-build-0-2026-06-21.md`](../governance/build-authorization-record-build-0-2026-06-21.md). **Build-1 authorized; Build-2 M4 complete** (integration-first program).
 
 ## Architecture Freeze
 
@@ -22,12 +22,12 @@ Formal declaration of locked architectural elements (CCIS, AMD I–IV, PDD, UXMD
 
 ## Architecture Decision Records (ADR)
 
-**[`adr/README.md`](adr/README.md)** — ADR program index (**35 Accepted** decisions: ADR-0001–0035)
+**[`adr/README.md`](adr/README.md)** — ADR program index (**38 Accepted** decisions: ADR-0001–0038)
 
 | Resource | Purpose |
 |----------|---------|
 | [`adr/template.md`](adr/template.md) | Template for new ADRs |
-| [`adr/0001`–`0035`](adr/) | Frozen architectural decisions |
+| [`adr/0001`–`0038`](adr/) | Frozen architectural decisions |
 
 ## Governance hierarchy
 
@@ -46,13 +46,13 @@ Document X (operational UX — subordinate to GIS)
   ↓
 SDD Volumes I–V
   ↓
-ADR Program (0001–0035)
+ADR Program (0001–0038)
   ↓
 Governance (build gates, alignment)
   ↓
-Build Authorization (Build-0 — BAR-2026-06-21-001)
+Build Authorization (Build-0 BAR; Build-1 BAR-2026-06-26-001)
   ↓
-Build-0 (in progress)
+Build-1 / Build-2 (M4 complete — closed-beta readiness)
 ```
 
 See [ADR-0001](adr/0001-document-authority-hierarchy.md) for rationale.

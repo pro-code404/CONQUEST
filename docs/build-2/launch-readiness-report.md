@@ -50,7 +50,7 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 |----|---------|--------|-----|
 | B2-P0-01 | **No durable persistence** | All data lost on restart | ~~Wire database~~ **Resolved M2** — set `DATABASE_URL` |
 | B2-P0-02 | **Intelligence/research route guard** | Demo paths redirect to CC | ~~Extend route-access.ts~~ **Resolved M1** |
-| B2-P0-03 | **No email delivery** | Verify/invite/reset broken in prod | **Partial M2** — `NotificationService` + audit; SMTP adapter deferred |
+| B2-P0-03 | **No email delivery** | Verify/invite/reset broken in prod | ~~SMTP adapter deferred~~ **Resolved M4** — Resend + SMTP + console via `createEmailProvider()` |
 | B2-P0-04 | **Intelligence data is seeded mock** | Recommendations not credible | ~~Cognitive pipeline~~ **Partial M1** — via research analyze |
 | B2-P0-05 | **Legal pages are drafts** | Cannot launch without counsel review | **Partial M2** — versioned + acceptance API; counsel review required |
 | B2-P0-06 | **No cookie consent** | Document X / GDPR gap | ~~Cookie banner~~ **Resolved M2** |
@@ -64,9 +64,9 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 | B2-P1-01 | Command Center zones empty | CC feels incomplete | ~~Wire intelligence feed~~ **Resolved M1** |
 | B2-P1-02 | Administration not in nav | Ops users cannot discover | ~~Add to SETTINGS_CATEGORIES~~ **Resolved M1** |
 | B2-P1-03 | Automation run is audit-only | "Run workflow" does nothing real | Execution engine (post-BAR) |
-| B2-P1-04 | No E2E test for demo journey | Regression risk | Playwright/Cypress full flow |
+| B2-P1-04 | No E2E test for demo journey | Regression risk | ~~Playwright/Cypress full flow~~ **Resolved M4** — `e2e/closed-beta-journey.spec.ts` in CI |
 | B2-P1-05 | Analytics charts deferred | Reports module incomplete | Visualization layer |
-| B2-P1-06 | Rate limiting non-enforcing | Abuse risk | Redis-backed limiter |
+| B2-P1-06 | Rate limiting non-enforcing | Abuse risk | **Partial M3** — 120 req/min enforced in-process; Redis-distributed upgrade planned |
 | B2-P1-07 | Legal routes guest-only | Logged-in users cannot read policies | ~~Public legal route group~~ **Resolved M2** |
 
 ---
@@ -80,7 +80,7 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 | B2-P2-03 | Privacy export/deletion jobs | Background worker + compliance |
 | B2-P2-04 | Billing/integrations OAuth | External provider wiring |
 | B2-P2-05 | Cognitive web UI | Ask Conquest (RTM-UX-009) |
-| B2-P2-06 | Redis not bootstrapped | `REDIS_URL` → platform |
+| B2-P2-06 | Redis not bootstrapped | `REDIS_URL` → platform | **Partial M4** — Redis cache/jobs when `REDIS_URL` set; in-memory CI fallback |
 | B2-P2-07 | Distributed tracing | Wire `runWithTraceContext` |
 
 ---
@@ -112,7 +112,7 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 | Intelligence API | Yes | No |
 | M1 integration flow | Yes (`app.test.ts` Build-2 describe) | No |
 | Cognitive pipeline | Yes (orchestrator, platform) | No |
-| Full demo journey | No | **Missing** |
+| Full demo journey | Yes (`e2e/closed-beta-journey.spec.ts`) | **Resolved M4** |
 
 ---
 

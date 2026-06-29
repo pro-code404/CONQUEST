@@ -1,5 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import { GisState, PRIMARY_NAV_ITEMS } from "@conquest/gis";
+import { RootLayout } from "../layouts/RootLayout.js";
 import {
   RequireAppShell,
   RequireAuth,
@@ -100,6 +101,9 @@ const secondaryModules = PRIMARY_NAV_ITEMS.filter(
 );
 
 export const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
   { path: "/invite/:token", element: <InviteAcceptScreen /> },
   { path: "/legal/privacy", element: <PrivacyPolicyScreen /> },
   { path: "/legal/terms", element: <TermsOfServiceScreen /> },
@@ -202,4 +206,6 @@ export const router: ReturnType<typeof createBrowserRouter> = createBrowserRoute
     ],
   },
   { path: "*", element: <Navigate to="/login" replace /> },
+    ],
+  },
 ]);

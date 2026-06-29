@@ -18,7 +18,7 @@
 
 ## Objective B — Knowledge base
 
-All 11 documents under `docs/knowledge-base/` — see [README](./knowledge-base/README.md).
+Original M4: 11 documents under `docs/knowledge-base/`. **Recovery Phase 2** added 6 mandatory master documents — see [knowledge-base README](../knowledge-base/README.md) and [recovery-phase-2-report.md](./recovery-phase-2-report.md).
 
 ---
 
@@ -39,4 +39,4 @@ All 11 documents under `docs/knowledge-base/` — see [README](./knowledge-base/
 
 ## Recommended next milestone
 
-**Build-2 M5** — Execution boundary (approve → execute workflow)
+**Build-2 M5** — Execution boundary (approve → execute workflow). **Prerequisite:** Recovery Phase 2 documentation sync merged and formal Build-2 BAR on governance rows B-25–B-28.

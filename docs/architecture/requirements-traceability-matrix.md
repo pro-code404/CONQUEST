@@ -47,7 +47,9 @@ CCIS Requirement → AMD Principle → PDD Workflow → UXMD Screen(s)
 | **In Build** | Implementation authorized and underway |
 | **Verified** | Test evidence confirms compliance |
 
-**Current program state:** Build-1 authorized (BAR-2026-06-26-001). Platform RTM rows `In Build`.
+**Current program state:** Build-1 authorized (BAR-2026-06-26-001). Build-2 **M4 complete** (closed-beta readiness, ~96%). Platform RTM rows remain `Specified` or `In Build` until formal verification evidence is recorded. **Execution-related rows** (RTM-INT-006, RTM-PDD-005–006) remain gated for **Build-2 M5** — `executionReady: false` in cognitive orchestrator.
+
+**Recovery Phase 2 (2026-06-21):** Repository documentation synchronized to M4 codebase truth. See [`../build-2/recovery-phase-2-report.md`](../build-2/recovery-phase-2-report.md).
 
 ---
 

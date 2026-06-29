@@ -1,10 +1,10 @@
 # Build-2 Integration Matrix
 
-**Status:** Authoritative — updated post B2-M1 Integration Batch (2026-06-28)  
-**Baseline:** Phase 11 + M1 complete · 249 tests passing · Build-1 BAR active  
+**Status:** Authoritative — synchronized post Build-2 M4 + Recovery Phase 2  
+**Baseline:** 278 tests · M1–M4 complete · Build-1 BAR active  
 **Rule:** No assumptions — every row reflects verified implementation state
 
-> **M1 delta:** See [m1-integration-batch-report.md](./m1-integration-batch-report.md). Route guards generalized; Command Center dashboard wired; cognitive pipeline connected Research → Intelligence → CC; intelligence seed removed.
+> **M4 delta:** Postgres persistence, Redis cache/jobs, email providers, Playwright e2e, legal acceptance, ops endpoints. See [m4-closed-beta-completion-report.md](./m4-closed-beta-completion-report.md).
 
 ---
 
@@ -16,9 +16,9 @@
 | **Wired** | Frontend ↔ API ↔ service connected; data may be in-memory or seeded |
 | **Hybrid** | Partial real integration; UI or data deferred |
 | **Placeholder** | Static shell or draft content; no backend |
-| **Stub** | API exists; external system faked (email, OAuth, execution) |
+| **Stub** | API exists; external system faked (OAuth, execution) |
 | **Blocked** | Governance or architecture forbids until gate passes |
-| **Deferred** | Planned Build-2; not implemented |
+| **Deferred** | Planned post-beta; not implemented |
 
 ---
 
@@ -26,14 +26,15 @@
 
 | Layer | Screens/Routes | Wired to API | Production persistence | Demo-ready |
 |-------|----------------|--------------|------------------------|------------|
-| Public auth | 8 routes | 7/8 | In-memory | Yes (dev verify token) |
-| Onboarding | 6 routes | 4/6 hybrid | In-memory | Partial (steps 4–5 cosmetic) |
-| Settings | 18 routes | 18/18 | In-memory | Yes |
-| Workspace modules | 22 routes | 22/22 | In-memory | **Improved** (M1) |
-| Cognitive API | 8 endpoints | 8/8 | In-memory | API + Research analyze UI |
-| Legal | 5 routes | 0/5 | N/A | Draft copy; landing footer links |
+| Public auth | 8 routes | 8/8 | Postgres when `DATABASE_URL` set | Yes |
+| Onboarding | 6 routes | 4/6 hybrid | Postgres | Partial (steps 4–5 cosmetic) |
+| Settings | 18 routes | 18/18 | Postgres | Yes |
+| Workspace modules | 22 routes | 22/22 | Postgres | Yes |
+| Cognitive API | 8 endpoints | 8/8 | Postgres + platform | Yes via research analyze |
+| Legal | 5 routes + API | 5/5 UI + API | Postgres acceptance | Partial (draft copy) |
+| Ops | 2 endpoints | 2/2 | N/A | Yes |
 
-**Critical finding:** The platform is **integration-complete at the API contract layer** but **persistence-incomplete**. All domain data lives in `MemoryAuthRepository` (lost on restart). `@conquest/database` schema exists but is not wired to `apps/api`.
+**Critical finding (M4):** Platform is **integration-complete** at API contract layer with **Postgres persistence** when `DATABASE_URL` is configured. CI uses `MEMORY_REPO=true`. Redis cache and job queue activate when `REDIS_URL` is set. Automation execution remains audit-only (M5).
 
 ---
 
@@ -44,24 +45,24 @@
 | Route | Screen | Presentation | Application | Backend | Persistence | Telemetry | AuthZ | Status |
 |-------|--------|--------------|-------------|---------|-------------|-----------|-------|--------|
 | `/` | Landing | Yes | Yes | No | — | Dev console | Guest | Wired — legal footer links |
-| `/login` | Login | Yes | Yes | `/api/auth/login` | MEM | No | Guest | Wired |
-| `/signup` | Sign up | Yes | Yes | `/api/auth/signup` | MEM | No | Guest | Wired |
-| `/forgot-password` | Forgot | Yes | Yes | `/api/auth/password/forgot` | MEM | No | Guest | Stub (no email) |
-| `/reset-password` | Reset | Yes | Yes | `/api/auth/password/reset` | MEM | No | Guest | Wired |
-| `/invite/:token` | Invite accept | Yes | Yes | `/api/auth/invite/*` | MEM | No | Mixed | Wired |
-| `/verify-email` | Verify | Yes | Yes | `/api/auth/verify-email` | MEM | No | Session | Wired (dev token) |
+| `/login` | Login | Yes | Yes | `/api/auth/login` | PG | No | Guest | Wired |
+| `/signup` | Sign up | Yes | Yes | `/api/auth/signup` | PG | No | Guest | Wired |
+| `/forgot-password` | Forgot | Yes | Yes | `/api/auth/password/forgot` | PG | No | Guest | Wired (email via NotificationService) |
+| `/reset-password` | Reset | Yes | Yes | `/api/auth/password/reset` | PG | No | Guest | Wired |
+| `/invite/:token` | Invite accept | Yes | Yes | `/api/auth/invite/*` | PG | No | Mixed | Wired |
+| `/verify-email` | Verify | Yes | Yes | `/api/auth/verify-email` | PG | No | Session | Wired (dev token) |
 
-### Legal (draft)
+### Legal
 
 | Route | Screen | Backend | Status |
 |-------|--------|---------|--------|
-| `/legal/privacy` | PrivacyPolicy | None | Placeholder — draft copy |
-| `/legal/terms` | Terms | None | Placeholder |
-| `/legal/cookies` | Cookies | None | Placeholder |
-| `/legal/ai-transparency` | AI Transparency | None | Placeholder |
-| `/legal/security` | Security | None | Placeholder |
+| `/legal/privacy` | PrivacyPolicy | `GET /api/legal/documents` | Wired — draft copy; counsel review pending |
+| `/legal/terms` | Terms | same | Wired — draft |
+| `/legal/cookies` | Cookies | same | Wired — draft |
+| `/legal/ai-transparency` | AI Transparency | same | Wired — draft |
+| `/legal/security` | Security | same | Wired — draft |
 
-Legal routes are under `RequireGuest` — authenticated users cannot view them.
+Legal routes are **public** for all users (including authenticated). Acceptance via `POST /api/legal/accept`.
 
 ### Onboarding
 
@@ -145,35 +146,36 @@ Legal routes are under `RequireGuest` — authenticated users cannot view them.
 
 ---
 
-## Part B — Backend Endpoints (104 routes)
+## Part B — Backend Endpoints (~100 routes)
 
-All routes live in `apps/api/src/app.ts`. Cross-cutting: session cookie auth, correlation ID middleware, rate-limit headers (non-blocking).
+All routes live in `apps/api/src/app.ts`. Cross-cutting: session cookie auth, correlation ID middleware, rate limit 120 req/min (enforced in-process).
 
 ### Persistence summary
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| MEM/REAL | ~55 | In-memory repo; real business logic |
-| MEM/STUB | ~18 | No email, OAuth, connectors, or job execution |
-| MEM/MOCK | ~15 | Seeded intelligence, formula KPIs, billing |
-| PARTIAL | ~10 | Cognitive pipeline, operations telemetry |
-| REAL (stateless) | 2 | Automation validation endpoints |
+| Postgres/REAL | ~90 | Drizzle repo when `DATABASE_URL` set; real business logic |
+| STUB | ~8 | OAuth, execution engine — honest deferred messaging |
+| MOCK/FORMULA | ~4 | Analytics KPI formula; charts deferred |
+| STATELESS | ~5 | Health, ops, degradation probes |
+
+CI uses `MEMORY_REPO=true` for test isolation.
 
 ### API groups
 
 | Group | Endpoints | Service | Persistence | Notes |
 |-------|-----------|---------|-------------|-------|
-| Auth & identity | 16 | `IdentityService` | MEM | No email delivery |
-| Workspaces & CC | 3 | `WorkspaceService`, `buildCommandCenterDashboard` | MEM | Status + integrated dashboard zones |
-| Profile | 3 | `IdentityService` | MEM | Session revocation works |
-| Settings | 45 | `SettingsService`, `WorkspaceService`, `SecurityService`, `AuditService` | MEM | Privacy export/deletion stubbed |
-| Automation | 16 | `AutomationService` | MEM | `manualRun` records only — no engine |
-| Intelligence | 9 | `IntelligenceService` | MEM | Cognitive-backed; honest empty state; no seed |
-| Research | 5 | `ResearchService`, `IntelligenceService` | MEM | Sessions + `POST .../analyze` cognitive bridge |
-| Analytics | 4 | `AnalyticsService` | MEM | KPI formula `100 - index*7` |
-| Operations | 1 | `OperationsService` | MEM + platform | Queue/cache from live platform |
-| Cognitive | 8 | `@conquest/platform` | In-memory | Deterministic; stub AI; no execution |
-| Health | 1 | Multiple | N/A | Platform + cognitive metrics |
+| Auth & identity | 16 | `IdentityService` | Postgres | Email via Resend/SMTP/console (M4) |
+| Workspaces & CC | 3 | `WorkspaceService`, `buildCommandCenterDashboard` | Postgres | Integrated dashboard zones |
+| Profile | 3 | `IdentityService` | Postgres | Session revocation works |
+| Settings | 45 | `SettingsService`, `WorkspaceService`, `SecurityService`, `AuditService` | Postgres | Privacy export/deletion stubbed |
+| Automation | 16 | `AutomationService` | Postgres | `manualRun` audit-only — no engine (M5) |
+| Intelligence | 9 | `IntelligenceService` | Postgres | Cognitive-backed; honest empty state |
+| Research | 5 | `ResearchService`, `IntelligenceService` | Postgres | Sessions + `POST .../analyze` cognitive bridge |
+| Analytics | 4 | `AnalyticsService` | Postgres | KPI formula `100 - index*7` |
+| Operations | 1 | `OperationsService` | Postgres + platform | Queue/cache from live platform |
+| Cognitive | 8 | `@conquest/platform` | In-memory pipeline | Deterministic; stub AI; `executionReady: false` |
+| Health / Ops | 5 | Multiple | N/A | Ready, status, degradation probes |
 
 Full endpoint inventory: see appendix in [production-blockers.md](./production-blockers.md).
 
@@ -184,19 +186,19 @@ Full endpoint inventory: see appendix in [production-blockers.md](./production-b
 | Component | Package | Wired | Backend | Class |
 |-----------|---------|-------|---------|-------|
 | Composition root | `@conquest/platform` | Yes | — | Production wiring |
-| Cache | `@conquest/cache` | Yes | In-memory (Redis factory unused) | Temporary |
-| Jobs | `@conquest/jobs` | Yes | In-memory store + DLQ | Temporary |
+| Cache | `@conquest/cache` | Yes | Redis when `REDIS_URL` set; in-memory fallback | Production-ready |
+| Jobs | `@conquest/jobs` | Yes | Redis `RedisJobStore` or in-memory fallback | Production-ready |
 | AI Gateway | `@conquest/ai-gateway` | Yes | Stub providers | Temporary |
 | AI Audit | `@conquest/ai-audit` | Yes | In-memory | Temporary |
 | Memory platform | `@conquest/memory-service` | Yes | In-memory kind stores | Temporary |
-| Cognitive orchestrator | `@conquest/cognitive` | Yes | Full pipeline; `executionReady: false` | Temporary |
+| Cognitive orchestrator | `@conquest/cognitive` | Yes | Full pipeline; `executionReady: false` | M5 gated |
 | Evidence / Reasoning / Decision | `@conquest/cognitive` | Yes | Deterministic in-memory | Temporary |
 | Prompt registry | `@conquest/prompt-management` | Yes | In-memory + prompt-security | Temporary |
 | Metrics | `@conquest/performance` | Yes | In-process collectors | Production scaffold |
-| Postgres | `@conquest/database` | **No** | Schema exists; not on API path | Deferred |
-| Redis | `@conquest/cache` | **No** | `REDIS_URL` not passed to bootstrap | Deferred |
-| Session manager | `services/session` | **No** | Optional DB adapter unused | Deferred |
-| Legacy PipelineRunner | `services/orchestrator` | **No** | 10-phase prototype | Prototype |
+| Postgres | `@conquest/database` | **Yes** | Drizzle on API path when `DATABASE_URL` set | **Resolved M2** |
+| Redis | `@conquest/cache`, `@conquest/jobs` | **Yes** | Bootstrapped from `REDIS_URL` | **Partial M4** |
+| Session manager | `services/session` | Partial | Sessions durable via Drizzle repo | Acceptable |
+| Legacy PipelineRunner | `services/orchestrator` | **No** | 10-phase prototype | Prototype only |
 
 ---
 
@@ -213,7 +215,7 @@ Full endpoint inventory: see appendix in [production-blockers.md](./production-b
 | operations, administration | Auth services + platform telemetry | Yes | Yes (admin in nav) |
 | cognitive/* (7 modules) | Platform cognitive stack | Yes | **Partial** — Research analyze UI (M1) |
 
-All 25 contract surfaces have TypeScript implementations. None use Postgres on the live path.
+All 25 contract surfaces have TypeScript implementations. Domain persistence uses **Postgres** when `DATABASE_URL` is configured; CI uses memory fallback.
 
 ---
 

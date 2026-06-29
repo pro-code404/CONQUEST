@@ -44,7 +44,7 @@ Workspace is **context**, not nav ([ADR-0003](../architecture/adr/0003-workspace
 - Governance CI, threat model, runbooks, BAR template
 - [`docs/governance/build-authorization-record-build-0-2026-06-21.md`](../governance/build-authorization-record-build-0-2026-06-21.md)
 
-### Build-1 (authorized, in progress)
+### Build-1 (authorized, foundation shipped)
 
 - Application shell (`apps/web`), GIS tokens, presentation components
 - Platform modules: cache, jobs, AI gateway, cognitive orchestrator, memory, prompts
@@ -60,7 +60,7 @@ Workspace is **context**, not nav ([ADR-0003](../architecture/adr/0003-workspace
 | **B2-M1** | Integration fixes, route access, CC wiring | ✅ Complete | ~78% |
 | **B2-M2** | Postgres persistence, legal, notifications | ✅ Complete | ~85% |
 | **B2-M3** | Docker, env validation, rate limits, ops status, backup | ✅ Complete | ~92% |
-| **B2-M4** | Closed-beta: Resend/SMTP, Redis jobs, Playwright e2e | 🔄 In progress | Target 95%+ |
+| **B2-M4** | Closed-beta: Resend/SMTP, Redis jobs, Playwright e2e | ✅ Complete | ~96% |
 | **B2-M5** | Execution engine (gated post-BAR) | 📋 Planned | — |
 
 Key Build-2 deliverables: [`docs/build-2/`](../build-2/) — integration matrix, launch readiness, production blockers, implementation roadmap.
@@ -101,9 +101,9 @@ Use these labels in RTM, issues, and agent communication:
 | Operations dashboard | Implemented | Queue/cache/AI provider telemetry |
 | Administration | Implemented | Feature flags; admin settings nav |
 | Analytics charts | Deferred | Registry + saved views; viz layer pending |
-| Email (prod) | In Progress | Resend + SMTP providers; console in dev |
-| Redis job queue | In Progress | Redis with in-memory fallback |
-| E2E demo journey | In Progress | Playwright added; full flow expanding |
+| Email (prod) | Implemented | Resend + SMTP + console; audit trail in Postgres |
+| Redis job queue | Implemented | Redis with in-memory CI fallback |
+| E2E demo journey | Implemented | Playwright `closed-beta-journey.spec.ts` in CI |
 | Strategy / Knowledge / Marketplace | Planned | Placeholder screens |
 
 ## Target user journey (closed beta)

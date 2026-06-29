@@ -1,7 +1,8 @@
 # Build-2 — Integration-First Program
 
 **Authorization:** Build-2 Integration-First Strategy (2026-06-27)  
-**Baseline:** B2-M2 Production Persistence complete · 257 tests passing
+**Baseline:** B2-M4 Closed Beta complete · 278 tests · Playwright e2e in CI  
+**Recovery:** Phase 3 engineering memory complete — see [Project Brain](../project-brain/README.md)
 
 Build-2 prioritizes **production readiness** over feature count. Every task must move Conquest closer to a demonstrable, production-ready platform.
 
@@ -11,16 +12,15 @@ Build-2 prioritizes **production readiness** over feature count. Every task must
 
 | # | Document | Status |
 |---|----------|--------|
-| 1 | [Integration Matrix](./integration-matrix.md) | Updated — post M1 |
-| 2 | [Launch Readiness Report](./launch-readiness-report.md) | Updated — post M2 |
-| 3 | [Master Spec Consolidation Plan](./master-spec-consolidation-plan.md) | Complete |
-| 4 | [Production Blocker List](./production-blockers.md) | Updated — post M2 |
-| 5 | [Implementation Roadmap](./implementation-roadmap.md) | Complete |
-| 6 | [Simulation Inventory](./simulation-inventory.md) | Updated — post M2 |
-| 7 | [M1 Integration Batch Report](./m1-integration-batch-report.md) | Complete |
-| 8 | [M2 Production Persistence Report](./m2-production-persistence-report.md) | **Complete** |
-| 9 | [Repository Migration Report](./repository-migration-report.md) | Complete |
-| 10 | [Database Schema Verification](./database-schema-verification.md) | Complete |
+| 1 | [Integration Matrix](./integration-matrix.md) | **Authoritative** — post M4 + Recovery Phase 2 |
+| 2 | [Launch Readiness Report](./launch-readiness-report.md) | **Authoritative** — ~96% closed-beta |
+| 3 | [Production Blocker List](./production-blockers.md) | **Authoritative** — post M4 |
+| 4 | [Implementation Roadmap](./implementation-roadmap.md) | Complete — M5 gated |
+| 5 | [Simulation Inventory](./simulation-inventory.md) | **Authoritative** — post M4 |
+| 6 | [Recovery Phase 2 Report](./recovery-phase-2-report.md) | **Complete** — knowledge sync |
+| 7 | [M4 Closed Beta Completion Report](./m4-closed-beta-completion-report.md) | Complete |
+| 8 | [Database Health Report](./database-health-report.md) | Updated M4 |
+| 9 | [M1–M3 milestone reports](./m1-integration-batch-report.md) | Historical snapshots |
 
 ---
 
@@ -30,26 +30,31 @@ Build-2 prioritizes **production readiness** over feature count. Every task must
 |-----------|--------|----------------|
 | B2-M1 Integration Batch | ✅ Complete | ~78% |
 | B2-M2 Production Persistence | ✅ Complete | ~85% |
+| B2-M3 Production Hardening | ✅ Complete | ~92% |
+| B2-M4 Closed Beta | ✅ Complete | ~96% |
+| B2-M5 Execution Boundary | 📋 Gated — not started | — |
 
 ---
 
-## B2-M2 Highlights
+## B2-M4 Highlights
 
-- `DrizzleAuthRepository` — full Postgres persistence for auth domain (83 methods)
-- `DATABASE_URL` + auto-migrate; `MEMORY_REPO=true` for CI
-- `NotificationService` — email delivery with audit trail
-- `LegalService` — durable acceptance records + cookie consent
-- `/api/health/live` and `/api/health/ready` probes
-- Legal routes accessible to all users; cookie consent banner
+- Resend + SMTP email providers with audit trail
+- Redis job queue with DLQ, retry, in-memory CI fallback
+- Playwright closed-beta journey e2e in CI
+- `/api/ops/degradation` dependency probes
+- Six master knowledge-base documents (Recovery Phase 2)
 
-**To enable persistence:** `DATABASE_URL=postgresql://conquest:conquest@localhost:5432/conquest`
+**To enable full persistence:** `DATABASE_URL=postgresql://conquest:conquest@localhost:5432/conquest`  
+**Optional:** `REDIS_URL=redis://localhost:6379`
 
 ---
 
 ## Immediate Next Step
 
-**B2-M3 Production Hardening:** SMTP email provider, Redis bootstrap, enforcing rate limits, Postgres in CI, persistence restart E2E test.
+**B2-M5 Execution Boundary** — gated. Requires formal Build-2 BAR closure on governance rows B-25–B-28. Do **not** start until Recovery Phase 2 is merged and stakeholders authorize execution work.
+
+**AI agent entry:** [`docs/knowledge-base/ai-agent-onboarding.md`](../knowledge-base/ai-agent-onboarding.md)
 
 ---
 
-*Last updated: B2-M2 Production Persistence (2026-06-28).*
+*Last updated: Recovery Phase 2 (2026-06-21).*

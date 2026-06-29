@@ -37,27 +37,39 @@ import type {
 import type { AuthResponse, SessionUser } from "./types.js";
 
 const API_BASE = "";
+const REQUEST_TIMEOUT_MS = 8_000;
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...init,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(init?.headers ?? {}),
-    },
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    const message = data.error ?? "Request failed";
-    throw new Error(`${response.status}: ${message}`);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    const response = await fetch(`${API_BASE}${path}`, {
+      ...init,
+      signal: controller.signal,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        ...(init?.headers ?? {}),
+      },
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message = data.error ?? "Request failed";
+      throw new Error(`${response.status}: ${message}`);
+    }
+    return data as T;
+  } finally {
+    clearTimeout(timeout);
   }
-  return data as T;
 }
 
 export async function fetchSession(): Promise<SessionUser | null> {
-  const data = await request<{ user: SessionUser | null }>("/api/auth/session");
-  return data.user;
+  try {
+    const data = await request<{ user: SessionUser | null }>("/api/auth/session");
+    return data.user;
+  } catch {
+    return null;
+  }
 }
 
 export async function signUp(body: {

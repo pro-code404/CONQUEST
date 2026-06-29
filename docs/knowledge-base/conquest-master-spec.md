@@ -1,5 +1,7 @@
 # Conquest Master Spec
 
+> **Superseded for product authority:** Use [**product-master-spec.md**](./product-master-spec.md) as the authoritative merged product specification. This document remains as a concise cross-reference index.
+
 Highest-level consolidated specification. **This document summarizes** authoritative corpora; on conflict, higher-order sources win per [ADR-0001](../architecture/adr/0001-document-authority-hierarchy.md).
 
 Cross-reference: [product-knowledge](./product-knowledge.md) · [architecture-reference](./architecture-reference.md) · [adr-index](./adr-index.md) · [`docs/build-2/`](../build-2/)
@@ -101,8 +103,8 @@ CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → RTM → A
 | Build | Record | Status |
 |-------|--------|--------|
 | Build-0 | [BAR 2026-06-21](../governance/build-authorization-record-build-0-2026-06-21.md) | Complete |
-| Build-1 | [BAR 2026-06-26](../governance/build-authorization-record-build-1-2026-06-26.md) | Authorized — M1 in progress |
-| Build-2 | Integration-first strategy (2026-06-27) | Active program |
+| Build-1 | [BAR 2026-06-26](../governance/build-authorization-record-build-1-2026-06-26.md) | Authorized — platform foundation shipped |
+| Build-2 | Integration-first strategy (2026-06-27) | **M4 complete** (~96% closed-beta) |
 
 **Engineering standards:** [SDD Volume V](../sdd/volume-v-engineering-standards-build-governance.md)
 
@@ -135,7 +137,7 @@ CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → RTM → A
 
 [ADR-0025](../architecture/adr/0025-production-readiness-gate.md) · [production-acceptance-report](../build-2/production-acceptance-report.md) (when present)
 
-**Current readiness: ~92%** for closed-beta demo per [launch-readiness-report](../build-2/launch-readiness-report.md).
+**Current readiness: ~96%** for closed-beta demo per [launch-readiness-report](../build-2/launch-readiness-report.md).
 
 ### Infrastructure (post M3)
 
@@ -185,7 +187,7 @@ Single-region Docker compose is current beta topology; multi-region HA is roadma
 | B2-M1 Integration batch | Route access, CC wiring, cognitive bridge | ~78% |
 | B2-M2 Production persistence | DrizzleAuthRepository, legal, notifications | ~85% |
 | B2-M3 Production hardening | Docker, env validation, rate limits, ops, backup | ~92% |
-| B2-M4 Closed-beta ready | Resend/SMTP, Redis jobs, Playwright e2e | In progress |
+| B2-M4 Closed-beta ready | Resend/SMTP, Redis jobs, Playwright e2e, KB master docs | ~96% |
 | B2-M5 Execution boundary | Real workflow execution | Gated |
 
 **Key artifacts:** [`docs/build-2/README.md`](../build-2/README.md)

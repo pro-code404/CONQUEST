@@ -1,66 +1,42 @@
 # Conquest Implementation
 
-
-
-**Build-1 authorized** per [BAR-2026-06-26-001](governance/build-authorization-record-build-1-2026-06-26.md). Milestone 1 in progress.
-
-
+**Build-1 authorized** per [BAR-2026-06-26-001](governance/build-authorization-record-build-1-2026-06-26.md). **Build-2 M4 complete** (closed-beta readiness).
 
 ## Status
 
-
-
 | Item | Path |
-
 |------|------|
-
 | Build-1 BAR (issued) | [`governance/build-authorization-record-build-1-2026-06-26.md`](governance/build-authorization-record-build-1-2026-06-26.md) |
-
-| Build-1 authorization package | [`governance/build-1-authorization-package-v1.0.md`](governance/build-1-authorization-package-v1.0.md) |
-
-| Milestone 1 plan | [`governance/build-1-milestone-1-plan-v1.0.md`](governance/build-1-milestone-1-plan-v1.0.md) |
-
-| Build-0 completion | [`governance/build-0-completion-report-v1.0.md`](governance/build-0-completion-report-v1.0.md) |
-
+| Build-2 program | [`build-2/README.md`](build-2/README.md) |
+| Knowledge base (start here) | [`knowledge-base/ai-agent-onboarding.md`](knowledge-base/ai-agent-onboarding.md) |
 | Build gate checklist | [`governance/build-authorization-checklist-v1.0.md`](governance/build-authorization-checklist-v1.0.md) |
 
-
+| Metric | Value |
+|--------|-------|
+| Tests | 278 Vitest + Playwright e2e |
+| Closed-beta readiness | ~96% |
+| Next milestone | B2-M5 (execution — gated) |
 
 ## Engineering
 
-
-
 ```bash
-
 pnpm install
-
-pnpm verify:build-0    # packages/services CI parity
-
-pnpm dev               # @conquest/web — authorized app shell
-
+pnpm build && pnpm typecheck && pnpm test
+pnpm dev               # API + web
+pnpm test:e2e          # Playwright closed-beta journey
 ```
 
+## Active implementation
 
-
-## Active work (Milestone 1)
-
-
-
-| Package | Purpose |
-
-|---------|---------|
-
-| `packages/gis` | GIS tokens + navigation constants (UXMD-III) |
-
-| `packages/presentation` | Shared shell components |
-
-| `apps/web` | Application shell, routing, auth scaffold |
-
-
+| Layer | Path | Purpose |
+|-------|------|---------|
+| API | `apps/api` | Hono HTTP server, ~100 routes |
+| Web | `apps/web` | Vite + React application shell |
+| Domain | `services/auth` | Identity, settings, automation, intelligence, research, legal |
+| Platform | `services/platform` | Cognitive, AI gateway, cache, jobs, memory, prompts |
+| Contracts | `packages/contracts` | Cross-module Zod contracts |
+| Database | `packages/database` | Drizzle schema + migrations |
 
 ## Authority
 
-
-
-`CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → RTM → Architecture Freeze`
-
+`CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → RTM → Architecture Freeze → BAR → Build`

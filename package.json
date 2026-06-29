@@ -12,6 +12,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "pnpm --filter @conquest/web... build && pnpm --parallel --filter @conquest/api --filter @conquest/web dev",
+    "dev:fast": "pnpm --parallel --filter @conquest/api --filter @conquest/web dev",
     "dev:api": "pnpm --filter @conquest/api dev",
     "test": "vitest run --config vitest.config.ts",
     "test:integration": "vitest run --config vitest.integration.config.ts",
@@ -27,8 +28,11 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
     "@types/node": "^22.10.0",
     "cross-env": "^7.0.3",
+    "happy-dom": "^15.11.7",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
   }

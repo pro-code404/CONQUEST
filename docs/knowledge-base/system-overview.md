@@ -148,6 +148,7 @@ See [api-reference](./api-reference.md#health--operations).
 | Build-2 M1 | Integration batch complete |
 | Build-2 M2 | Postgres persistence complete |
 | Build-2 M3 | Production hardening (~92% demo readiness) |
-| Build-2 M4 | In progress — SMTP/Resend email, Redis jobs, e2e, dependency probes |
+| Build-2 M4 | Closed-beta complete (~96%) — email, Redis jobs, Playwright e2e, master KB docs |
+| Recovery Phase 2 | Repository knowledge synchronization — single source of truth |
 
 See [product-knowledge](./product-knowledge.md) and [`docs/build-2/`](../build-2/).

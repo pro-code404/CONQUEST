@@ -214,11 +214,13 @@ See [ADR-0001](docs/architecture/adr/0001-document-authority-hierarchy.md) and [
 
 When documents conflict, the higher layer in the chain above prevails.
 
-**Build-1 authorized** per [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). Milestone 1 in progress.
+**Project Brain (read first):** [`docs/project-brain/README.md`](docs/project-brain/README.md) — supreme engineering memory.
 
-See [`docs/governance/build-1-milestone-1-plan-v1.0.md`](docs/governance/build-1-milestone-1-plan-v1.0.md) and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
+**Build-1 authorized** per [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). **Build-2 M4 complete**. **M5 gated.** AI agents: Project Brain Chapters 01 + 16, then [`docs/knowledge-base/ai-agent-onboarding.md`](docs/knowledge-base/ai-agent-onboarding.md).
 
-**Prototype code** has been archived to [`docs/archive/prototype/`](docs/archive/prototype/README.md) — see [`PROTOTYPE.md`](PROTOTYPE.md).
+See [`docs/project-brain/recovery-phase-3-validation.md`](docs/project-brain/recovery-phase-3-validation.md) and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
+
+**Live implementation** is in `apps/`, `packages/`, and `services/`. Historical prototype code is archived at [`docs/archive/prototype/`](docs/archive/prototype/README.md) — see [`PROTOTYPE.md`](PROTOTYPE.md).
 
 ---
 
