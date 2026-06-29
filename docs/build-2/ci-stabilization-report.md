@@ -35,7 +35,19 @@ Windows dev machines had stale `services/shared/dist/` from prior builds. `promp
 
 ### Change
 
-Moved `services/shared` from position 22 to position 3 (after `core` and `observability`, before any consumer including `prompt-management`).
+Replaced static build order with **topological sort** from `package.json` `workspace:*` dependencies. Ensures every package builds after its dependencies on fresh CI checkouts (fixes `@conquest/service-shared`, `@conquest/gis`, and any future ordering gaps).
+
+### Run 11 — CI #11 (post-partial build-order fix)
+
+| Field | Value |
+|-------|-------|
+| **Workflow Run ID** | [28407786267](https://github.com/pro-code404/CONQUEST/actions/runs/28407786267) |
+| **Commit** | `9a77f06` — partial build order fix |
+| **Failed step** | `Run pnpm build` |
+| **Error** | `Cannot find module '@conquest/gis'` |
+| **Root cause** | `packages/visualization-config` built before `packages/gis` |
+| **Resolution** | Topological sort in `scripts/build.mjs` |
+| **Status** | **Fixed** (follow-up commit) |
 
 ---
 
