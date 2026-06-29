@@ -216,11 +216,9 @@ When documents conflict, the higher layer in the chain above prevails.
 
 **Project Brain (read first):** [`docs/project-brain/README.md`](docs/project-brain/README.md) — supreme engineering memory.
 
-**Institutional memory (read after Project Brain Ch 18):** [`docs/institutional-memory/README.md`](docs/institutional-memory/README.md) — constitution, cognitive philosophy, domain encyclopedia.
+**Build-1 authorized** per [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). **Build-2 M4 complete**. **M5 gated** (BAR, B-25–B-28 — not documentation). AI agents: Project Brain Chapters **01 + 16 + 18**, then [`docs/knowledge-base/ai-agent-onboarding.md`](docs/knowledge-base/ai-agent-onboarding.md).
 
-**Build-1 authorized** per [`docs/governance/build-authorization-record-build-1-2026-06-26.md`](docs/governance/build-authorization-record-build-1-2026-06-26.md). **Build-2 M4 complete**. **M5 gated** (BAR, B-25–B-28 — not documentation). AI agents: Project Brain Chapters **01 + 16 + 18**, then [`docs/institutional-memory/07-ai-onboarding-curriculum.md`](docs/institutional-memory/07-ai-onboarding-curriculum.md).
-
-See [`docs/institutional-memory/documentation-coverage-report.md`](docs/institutional-memory/documentation-coverage-report.md), [`docs/project-brain/architectural-continuity-test.md`](docs/project-brain/architectural-continuity-test.md), and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
+See [`docs/project-brain/architectural-continuity-test.md`](docs/project-brain/architectural-continuity-test.md), [`docs/project-brain/recovery-phase-4-validation.md`](docs/project-brain/recovery-phase-4-validation.md), and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
 
 **Live implementation** is in `apps/`, `packages/`, and `services/`. Historical prototype code is archived at [`docs/archive/prototype/`](docs/archive/prototype/README.md) — see [`PROTOTYPE.md`](PROTOTYPE.md).
 

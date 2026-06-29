@@ -21,7 +21,7 @@ Chronological evolution from architecture freeze through Recovery Phase 4.
 | Recovery P2 | Doc sync | 6 master KB docs, single truth |
 | Preview regression | Router context bug | CookieConsentBanner fix + RCA |
 | Recovery P3 | Project Brain | Engineering memory consolidation (Ch 00–17) |
-| **Recovery P4** | **Institutional memory** | **Cognitive preservation — 10 corpora, domain encyclopedia, 97.2% coverage** |
+| **Recovery P4** | **Decision framework** | **Architectural judgment + continuity test (Ch 18)** |
 
 ---
 

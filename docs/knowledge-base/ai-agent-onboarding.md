@@ -12,7 +12,7 @@ Cross-reference: [engineering-constitution](./engineering-constitution.md) · [`
 
 Conquest is a **Strategic Intelligence Operating System (CIOS)** — **not an AI wrapper, not a chatbot**. It routes requests through a governed cognitive pipeline (evidence → reasoning → decision → verification) with multi-tenant workspaces and Command Center UX.
 
-**Current program:** Build-2 **M4 complete**. **M5 execution is gated** — requires Build-2 BAR (B-25–B-28). Recovery Phase 4 institutional memory is complete ([97.2% coverage](../institutional-memory/documentation-coverage-report.md)).
+**Current program:** Build-2 **M4 complete**. **M5 execution is gated** — requires Build-2 BAR (B-25–B-28). Recovery Phase 4 (architectural judgment) is complete.
 
 **Git baseline:** 278 Vitest tests, Playwright e2e in CI.
 
@@ -26,8 +26,6 @@ Conquest is a **Strategic Intelligence Operating System (CIOS)** — **not an AI
 | 0b | [01 Philosophy](../project-brain/01-philosophy-and-identity.md) | Why Conquest is an Intelligence OS |
 | 0c | [16 Misconceptions](../project-brain/16-common-misconceptions.md) | False beliefs that cause defects |
 | 0d | [18 Decision framework](../project-brain/18-architectural-decision-framework.md) | How to make architectural decisions |
-| 0e | [Institutional Memory](../institutional-memory/README.md) | Constitution, philosophy, domain encyclopedia |
-| 0f | [AI Curriculum](../institutional-memory/07-ai-onboarding-curriculum.md) | Structured 7-day learning path |
 | 1 | **This file** | Agent workflow |
 | 2 | [engineering-constitution.md](./engineering-constitution.md) | Permanent rules |
 | 3 | [agent-handbook.md](./agent-handbook.md) | Resume checklist |

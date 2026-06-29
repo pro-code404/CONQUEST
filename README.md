@@ -16,8 +16,6 @@ Conquest is a cognitive operating system governed by a frozen architecture progr
 
 **Start here (everyone):** [`docs/project-brain/README.md`](docs/project-brain/README.md) — **Project Brain** (supreme engineering memory)
 
-**Institutional memory (Phase 4):** [`docs/institutional-memory/README.md`](docs/institutional-memory/README.md) — constitution, philosophy, domain encyclopedia, **97.2% coverage**
-
 **Quick start (engineers & AI agents):** [`docs/knowledge-base/ai-agent-onboarding.md`](docs/knowledge-base/ai-agent-onboarding.md)
 
 ## Authority chain
@@ -34,8 +32,7 @@ CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governanc
 | Product | [`docs/pdd/README.md`](docs/pdd/README.md) |
 | Experience | [`docs/uxmd/README.md`](docs/uxmd/README.md) |
 | Engineering | [`docs/sdd/README.md`](docs/sdd/README.md) |
-| **Institutional memory** | [`docs/institutional-memory/README.md`](docs/institutional-memory/README.md) |
-| Build-2 tracking | [`docs/build-2/`](docs/build-2/) — [Recovery Phase 4](docs/institutional-memory/documentation-coverage-report.md) |
+| Build-2 tracking | [`docs/build-2/`](docs/build-2/) — [Recovery Phase 4](docs/project-brain/recovery-phase-4-validation.md) |
 | Governance | [`docs/governance/`](docs/governance/) |
 
 See [`AGENTS.md`](AGENTS.md) for Chief Systems Engineer instructions.
