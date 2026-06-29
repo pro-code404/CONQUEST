@@ -2,7 +2,7 @@
 
 **Authorization:** Build-2 Integration-First Strategy (2026-06-27)  
 **Baseline:** B2-M4 Closed Beta complete · 278 tests · Playwright e2e in CI  
-**Recovery:** Phase 4 complete (judgment + continuity test) — see [Project Brain](../project-brain/README.md)
+**Recovery:** Phase 4 complete — [institutional memory](../institutional-memory/README.md) · [97.2% coverage](../institutional-memory/documentation-coverage-report.md)
 
 Build-2 prioritizes **production readiness** over feature count. Every task must move Conquest closer to a demonstrable, production-ready platform.
 
@@ -18,9 +18,10 @@ Build-2 prioritizes **production readiness** over feature count. Every task must
 | 4 | [Implementation Roadmap](./implementation-roadmap.md) | Complete — M5 gated |
 | 5 | [Simulation Inventory](./simulation-inventory.md) | **Authoritative** — post M4 |
 | 6 | [Recovery Phase 2 Report](./recovery-phase-2-report.md) | **Complete** — knowledge sync |
-| 7 | [M4 Closed Beta Completion Report](./m4-closed-beta-completion-report.md) | Complete |
-| 8 | [Database Health Report](./database-health-report.md) | Updated M4 |
-| 9 | [M1–M3 milestone reports](./m1-integration-batch-report.md) | Historical snapshots |
+| 7 | [Institutional Memory Coverage](../institutional-memory/documentation-coverage-report.md) | **Complete** — Phase 4 · 97.2% |
+| 8 | [M4 Closed Beta Completion Report](./m4-closed-beta-completion-report.md) | Complete |
+| 9 | [Database Health Report](./database-health-report.md) | Updated M4 |
+| 10 | [M1–M3 milestone reports](./m1-integration-batch-report.md) | Historical snapshots |
 
 ---
 

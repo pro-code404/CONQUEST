@@ -73,7 +73,18 @@ Read in sequence. Do not skip chapters because you "already know AI."
 | 17 | [Worked examples](./17-worked-examples-and-scenarios.md) | End-to-end scenarios with sequence diagrams |
 | 18 | [Architectural decision framework](./18-architectural-decision-framework.md) | **How future architects must think — judgment, principles, anti-patterns** |
 
-**After reading:** [Architectural continuity test](./architectural-continuity-test.md) · [Recovery Phase 4 validation](./recovery-phase-4-validation.md)
+### Institutional memory (Recovery Phase 4 — cognitive preservation)
+
+| Corpus | Path |
+|--------|------|
+| **Institutional memory (start after Ch 18)** | [`docs/institutional-memory/`](../institutional-memory/README.md) |
+| Constitution | [01-conquest-constitution.md](../institutional-memory/01-conquest-constitution.md) |
+| Intelligence philosophy | [02-intelligence-philosophy-manual.md](../institutional-memory/02-intelligence-philosophy-manual.md) |
+| Decision encyclopedia (38 ADRs) | [03-engineering-decision-encyclopedia.md](../institutional-memory/03-engineering-decision-encyclopedia.md) |
+| Domain encyclopedia (15 domains) | [04-domain-encyclopedia/](../institutional-memory/04-domain-encyclopedia/README.md) |
+| Coverage report | [documentation-coverage-report.md](../institutional-memory/documentation-coverage-report.md) |
+
+**After reading:** [Institutional Memory](../institutional-memory/README.md) · [Architectural continuity test](./architectural-continuity-test.md) · [Recovery Phase 4 validation](./recovery-phase-4-validation.md)
 
 ---
 
@@ -112,7 +123,7 @@ All of the above are **false** in the current authorized codebase (Build-2 M4).
 | Next | M5 execution boundary — **gated, not started** |
 | Tests | 278 Vitest + Playwright e2e |
 | Closed-beta readiness | ~96% |
-| Recovery | Phase 4 complete — judgment layer + continuity test |
+| Recovery | Phase 4 complete — institutional memory + 97.2% coverage |
 | M5 | Gated on BAR, B-25–B-28, legal — **not** on documentation |
 
 ---
