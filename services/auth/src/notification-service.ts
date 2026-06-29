@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { SERVICE_NAMES } from "@conquest/core";
+import { getTraceContext } from "@conquest/observability";
 import { ApplicationServiceBase } from "@conquest/service-shared";
 import type { AuthRepository } from "./auth-repository.js";
 import type { EmailDeliveryProvider, EmailDeliveryType } from "./email/types.js";
@@ -101,11 +102,13 @@ export class NotificationService extends ApplicationServiceBase {
     subject: string;
     text: string;
   }): Promise<void> {
+    const correlationId = getTraceContext()?.correlationId;
     try {
       const result = await this.provider.send({
         to: input.recipient,
         subject: input.subject,
         text: input.text,
+        ...(correlationId ? { correlationId } : {}),
       });
       await this.repo.recordEmailDelivery({
         id: randomUUID(),
@@ -119,7 +122,11 @@ export class NotificationService extends ApplicationServiceBase {
         errorMessage: null,
         createdAt: Date.now(),
       });
-      this.emit("email_sent", "info", { emailType: input.emailType, recipient: input.recipient });
+      this.emit("email_sent", "info", {
+        emailType: input.emailType,
+        recipient: input.recipient,
+        ...(correlationId ? { correlationId } : {}),
+      });
     } catch (error) {
       const message = error instanceof Error ? error.message : "Delivery failed";
       await this.repo.recordEmailDelivery({
@@ -134,7 +141,12 @@ export class NotificationService extends ApplicationServiceBase {
         errorMessage: message,
         createdAt: Date.now(),
       });
-      this.emit("email_failed", "error", { emailType: input.emailType, recipient: input.recipient, message });
+      this.emit("email_failed", "error", {
+        emailType: input.emailType,
+        recipient: input.recipient,
+        message,
+        ...(correlationId ? { correlationId } : {}),
+      });
       throw error;
     }
   }

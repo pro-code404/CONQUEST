@@ -18,9 +18,14 @@
     "@conquest/database": "workspace:*",
     "@conquest/gis": "workspace:*",
     "@conquest/service-shared": "workspace:*",
+    "@conquest/observability": "workspace:*",
     "drizzle-orm": "^0.38.3",
+    "nodemailer": "^6.9.16",
     "postgres": "^3.4.5",
     "zod": "^3.24.1"
   },
-  "devDependencies": { "typescript": "^5.7.2" }
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "typescript": "^5.7.2"
+  }
 }

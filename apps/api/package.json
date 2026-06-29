@@ -18,6 +18,7 @@
     "@conquest/contracts": "workspace:*",
     "@conquest/database": "workspace:*",
     "@conquest/gis": "workspace:*",
+    "@conquest/jobs": "workspace:*",
     "@conquest/observability": "workspace:*",
     "@conquest/performance": "workspace:*",
     "@conquest/platform": "workspace:*",

@@ -11,3 +11,5 @@ coverage/
 .DS_Store
 *.tsbuildinfo
 drizzle/meta/
+playwright-report/
+test-results/

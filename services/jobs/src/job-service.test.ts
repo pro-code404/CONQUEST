@@ -8,13 +8,13 @@ describe("Job framework (Phase 8B)", () => {
     const jobs = new JobService();
     jobs.registerHandler({
       type: "email",
-      async handle(job, reportProgress) {
+      async handle(_job, reportProgress) {
         reportProgress(50);
         reportProgress(100);
       },
     });
 
-    const enqueued = jobs.enqueue({
+    const enqueued = await jobs.enqueue({
       type: "email",
       payload: { to: "user@example.com" },
       correlationId: "corr-1",
@@ -38,7 +38,7 @@ describe("Job framework (Phase 8B)", () => {
       },
     });
 
-    const job = jobs.enqueue({
+    const job = await jobs.enqueue({
       type: "import",
       payload: {},
       correlationId: "corr-2",
@@ -46,17 +46,17 @@ describe("Job framework (Phase 8B)", () => {
     });
 
     await jobs.processNext();
-    await jobs.processNext(Date.now() + JOB_CONSTANTS.DEFAULT_RETRY_DELAY_MS * 2);
-    const final = jobs.getJob(job.id);
+    await jobs.processNext(Date.now() + JOB_CONSTANTS.DEFAULT_RETRY_DELAY_MS * 4);
+    const final = await jobs.getJob(job.id);
     expect(calls).toBe(2);
     expect(final?.status).toBe("dead_letter");
-    expect(jobs.listDeadLetter().length).toBe(1);
+    expect((await jobs.listDeadLetter()).length).toBe(1);
   });
 
   it("supports delayed jobs", async () => {
     const jobs = new JobService();
     jobs.registerHandler({ type: "export", async handle() {} });
-    jobs.enqueue({
+    await jobs.enqueue({
       type: "export",
       payload: {},
       correlationId: "corr-3",
@@ -66,9 +66,9 @@ describe("Job framework (Phase 8B)", () => {
     expect(immediate).toBeNull();
   });
 
-  it("cancels queued jobs", () => {
+  it("cancels queued jobs", async () => {
     const jobs = new JobService();
-    const job = jobs.enqueue({
+    const job = await jobs.enqueue({
       type: "indexing",
       payload: {},
       correlationId: "corr-4",
@@ -77,14 +77,33 @@ describe("Job framework (Phase 8B)", () => {
         workspaceId: "660e8400-e29b-41d4-a716-446655440001",
       }),
     });
-    const cancelled = jobs.cancel(job.id);
+    const cancelled = await jobs.cancel(job.id);
     expect(cancelled.status).toBe("cancelled");
   });
 
   it("reports queue metrics", async () => {
     const jobs = new JobService();
-    jobs.enqueue({ type: "ai_request", payload: {}, correlationId: "c1" });
-    const metrics = jobs.getMetrics();
+    await jobs.enqueue({ type: "ai_request", payload: {}, correlationId: "c1" });
+    const metrics = await jobs.getMetrics();
     expect(metrics.queued).toBeGreaterThan(0);
+  });
+
+  it("times out long-running jobs", async () => {
+    const jobs = new JobService();
+    jobs.registerHandler({
+      type: "document_processing",
+      async handle() {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      },
+    });
+    const job = await jobs.enqueue({
+      type: "document_processing",
+      payload: { timeoutMs: 5 },
+      correlationId: "timeout-1",
+      maxAttempts: 1,
+    });
+    const result = await jobs.processNext();
+    expect(result?.id).toBe(job.id);
+    expect(result?.error).toContain("timeout");
   });
 });

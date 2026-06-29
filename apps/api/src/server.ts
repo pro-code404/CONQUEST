@@ -7,6 +7,7 @@ import {
   runMigrations,
 } from "@conquest/database";
 import { createRedisClient } from "@conquest/platform";
+import { createJobService } from "@conquest/jobs";
 import { createApiApp } from "./app.js";
 
 const apiEnv = validateApiEnvironment();
@@ -17,10 +18,15 @@ if (apiEnv.persistenceMode === "postgres" && apiEnv.DATABASE_URL) {
 }
 
 const redisClient = apiEnv.REDIS_URL ? await createRedisClient(apiEnv.REDIS_URL) : null;
+const { service: jobService, label: jobQueueLabel } = await createJobService({
+  redisUrl: apiEnv.REDIS_URL ?? null,
+});
 
 const { app } = await createApiApp({
   apiEnv,
   ...(redisClient ? { redisClient } : {}),
+  jobService,
+  jobQueueLabel,
 });
 
 let backupSchedulerCancel: (() => void) | undefined;
@@ -42,6 +48,7 @@ const server = serve({ fetch: app.fetch, port }, () => {
       profile: apiEnv.profile,
       persistence: apiEnv.persistenceMode,
       redis: Boolean(redisClient),
+      jobQueue: jobQueueLabel,
     }),
   );
 });

@@ -3,6 +3,7 @@ import type { PlatformServices } from "@conquest/platform";
 import { getCognitiveMetricsSnapshot, getPlatformHealthReport } from "@conquest/platform";
 import type { OperationalMetricsSnapshot } from "@conquest/performance";
 import type { RateLimitEvent } from "./middleware/rate-limit.js";
+import type { JobQueueMetrics } from "@conquest/jobs";
 import { securityEvents } from "./infrastructure/security-events.js";
 
 export interface OperationalStatusView {
@@ -14,7 +15,7 @@ export interface OperationalStatusView {
   dependencies: Awaited<ReturnType<typeof getPlatformHealthReport>>;
   metrics: {
     cache: ReturnType<PlatformServices["cache"]["getMetrics"]>;
-    queue: ReturnType<PlatformServices["jobs"]["getMetrics"]>;
+    queue: JobQueueMetrics;
     cognitive: ReturnType<typeof getCognitiveMetricsSnapshot>;
     aiProviders: ReturnType<PlatformServices["aiProvider"]["listProviderStatus"]>;
     platform: ReturnType<PlatformServices["metrics"]["snapshot"]>;
@@ -31,7 +32,7 @@ export interface OperationalStatusView {
   };
   database: { reachable: boolean; mode: RepositoryMode };
   cache: { provider: string; healthy: boolean };
-  queue: ReturnType<PlatformServices["jobs"]["getMetrics"]>;
+  queue: JobQueueMetrics;
 }
 
 export async function buildOperationalStatus(input: {
@@ -47,7 +48,8 @@ export async function buildOperationalStatus(input: {
   const failedCount = deliveries.filter((d) => d.status === "failed").length;
 
   input.platform.metrics.setCacheMetrics(input.platform.cache.getMetrics());
-  input.platform.metrics.setQueueMetrics(input.platform.jobs.getMetrics());
+  const queueMetrics = await input.platform.jobs.getMetrics();
+  input.platform.metrics.setQueueMetrics(queueMetrics);
 
   let dbReachable = input.persistenceMode === "memory";
   if (input.persistenceMode === "postgres") {
@@ -68,7 +70,7 @@ export async function buildOperationalStatus(input: {
         : "healthy";
 
   const cacheMetrics = input.platform.cache.getMetrics();
-  const queueMetrics = input.platform.jobs.getMetrics();
+  const queueMetricsResolved = await input.platform.jobs.getMetrics();
 
   return {
     service: "conquest-api",
@@ -79,7 +81,7 @@ export async function buildOperationalStatus(input: {
     dependencies: platformHealth,
     metrics: {
       cache: cacheMetrics,
-      queue: queueMetrics,
+      queue: queueMetricsResolved,
       cognitive: getCognitiveMetricsSnapshot(input.platform),
       aiProviders: input.platform.aiProvider.listProviderStatus(),
       platform: input.platform.metrics.snapshot(),
@@ -96,6 +98,6 @@ export async function buildOperationalStatus(input: {
     },
     database: { reachable: dbReachable, mode: input.persistenceMode },
     cache: { provider: input.platform.cacheLabel, healthy: true },
-    queue: queueMetrics,
+    queue: queueMetricsResolved,
   };
 }

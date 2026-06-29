@@ -43,6 +43,7 @@ export interface PlatformServices {
   cacheLabel: string;
 
   jobs: JobService;
+  jobQueueLabel: string;
 
   aiGateway: AiGateway;
 
@@ -72,7 +73,10 @@ export interface PlatformServices {
 
 
 
-export interface PlatformServicesOptions extends CacheProviderFactoryOptions {}
+export interface PlatformServicesOptions extends CacheProviderFactoryOptions {
+  jobService?: JobService;
+  jobQueueLabel?: "redis" | "in-memory";
+}
 
 
 
@@ -82,7 +86,8 @@ export function createPlatformServices(options: PlatformServicesOptions = {}): P
 
   const cache = new CacheService({ provider: cacheProvider });
 
-  const jobs = new JobService();
+  const jobs = options.jobService ?? new JobService();
+  const jobQueueLabel = options.jobQueueLabel ?? jobs.queueLabel;
 
   const aiAudit = new AiAuditService();
 
@@ -220,7 +225,7 @@ export function createPlatformServices(options: PlatformServicesOptions = {}): P
 
   metrics.setCacheMetrics(cache.getMetrics());
 
-  metrics.setQueueMetrics(jobs.getMetrics());
+  void jobs.getMetrics().then((queueMetrics) => metrics.setQueueMetrics(queueMetrics));
 
 
 
@@ -231,6 +236,8 @@ export function createPlatformServices(options: PlatformServicesOptions = {}): P
     cacheLabel,
 
     jobs,
+
+    jobQueueLabel,
 
     aiGateway,
 

@@ -21,7 +21,7 @@ Build-2 does **not** expand infrastructure unless it unblocks production. Implem
 | **B2-M1** | Integration fixes + persistence foundation | Journey navigable; data survives restart | P0-01, P0-02, P0-08, P0-12 |
 | **B2-M2** | Real intelligence + Command Center | Credible recommendations in CC | P0-04, P0-03, P1-10 |
 | **B2-M3** | Production hardening | Staging-deployable | ~~P0-09, P1-11–16~~ **Complete** |
-| **B2-M4** | Closed-beta ready | Full demo script + E2E | P0-06–07, P0-11, P1-* |
+| **B2-M4** | Closed-beta ready | Full demo + E2E + KB | ~~P0-03, P0-11, P1-11–12~~ **Complete** |
 | **B2-M5** | Execution boundary (gated) | Approve → execute workflow | B-25–B-28, execution engine |
 
 Each milestone maintains green CI: `pnpm build && pnpm typecheck && pnpm test`.

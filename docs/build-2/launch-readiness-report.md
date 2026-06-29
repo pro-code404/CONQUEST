@@ -1,10 +1,10 @@
 # Build-2 Launch Readiness Report
 
 **Audience:** Closed-beta preparation  
-**Baseline:** B2-M3 Production Hardening complete · 263+ tests · Build-1 BAR active  
-**Date:** 2026-06-21 (updated post-M3)
+**Baseline:** B2-M4 Closed Beta Completion · 278 tests · Build-1 BAR active  
+**Date:** 2026-06-21 (updated post-M4)
 
-> **M3 delta:** Demo readiness ~92% (was ~85%). Docker compose, env validation, ops status, rate limit enforcement, backup hooks. See [production-acceptance-report.md](./production-acceptance-report.md).
+> **M4 delta:** Demo readiness ~96% (was ~92%). Resend/SMTP email, Redis job queue, Playwright e2e, dependency probes, knowledge base. See [m4-closed-beta-completion-report.md](./m4-closed-beta-completion-report.md).
 
 ---
 
@@ -40,7 +40,7 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 | Logout | Yes | — | Session revoked |
 | Reconnect / session restored | Yes | Low | Login + cookie restore; sessions durable in Postgres (M2) |
 
-**Overall demo readiness: ~92%** — deployment layer, observability, and security hardening complete; SMTP provider and E2E tests remain primary blockers.
+**Overall demo readiness: ~96%** — email providers, Redis jobs, Playwright e2e, degradation probes, and knowledge base complete. Legal counsel review and automation execution remain.
 
 ---
 

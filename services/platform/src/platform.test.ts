@@ -24,7 +24,7 @@ describe("Platform composition (Phase 8–11)", () => {
 
     expect(platform.cache).toBeTruthy();
 
-    expect(platform.jobs.getMetrics().queued).toBe(0);
+    expect((await platform.jobs.getMetrics()).queued).toBe(0);
 
     expect(platform.cognitive).toBeTruthy();
 

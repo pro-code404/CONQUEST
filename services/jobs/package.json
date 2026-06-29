@@ -14,7 +14,8 @@
   "dependencies": {
     "@conquest/config": "workspace:*",
     "@conquest/core": "workspace:*",
-    "@conquest/service-shared": "workspace:*"
+    "@conquest/service-shared": "workspace:*",
+    "redis": "^4.7.0"
   },
   "devDependencies": { "typescript": "^5.7.2" }
 }

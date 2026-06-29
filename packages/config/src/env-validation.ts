@@ -11,7 +11,7 @@ const BaseEnvSchema = z.object({
   REDIS_URL: z.string().optional(),
   JWT_SECRET: z.string().optional(),
   APP_BASE_URL: z.string().url().optional(),
-  EMAIL_PROVIDER: z.enum(["console", "smtp"]).optional(),
+  EMAIL_PROVIDER: z.enum(["console", "resend", "smtp"]).optional(),
   CORS_ORIGINS: z.string().optional(),
   CONQUEST_API_KEY: z.string().optional(),
 });

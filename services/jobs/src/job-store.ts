@@ -1,11 +1,12 @@
 import { randomUUID } from "node:crypto";
 import { JOB_CONSTANTS } from "@conquest/config";
 import type { EnqueueJobInput, JobQueueMetrics, JobRecord } from "./types.js";
+import type { JobStore } from "./job-store-interface.js";
 
-export class InMemoryJobStore {
+export class InMemoryJobStore implements JobStore {
   private readonly jobs = new Map<string, JobRecord>();
 
-  enqueue(input: EnqueueJobInput): JobRecord {
+  async enqueue(input: EnqueueJobInput): Promise<JobRecord> {
     const now = Date.now();
     const job: JobRecord = {
       id: randomUUID(),
@@ -27,26 +28,26 @@ export class InMemoryJobStore {
     return job;
   }
 
-  get(id: string): JobRecord | null {
+  async get(id: string): Promise<JobRecord | null> {
     return this.jobs.get(id) ?? null;
   }
 
-  update(job: JobRecord): void {
+  async update(job: JobRecord): Promise<void> {
     this.jobs.set(job.id, job);
   }
 
-  listReady(now = Date.now()): JobRecord[] {
+  async listReady(now = Date.now()): Promise<JobRecord[]> {
     return [...this.jobs.values()].filter(
       (job) =>
         (job.status === "queued" || job.status === "delayed") && job.scheduledAt <= now,
     );
   }
 
-  listByStatus(status: JobRecord["status"]): JobRecord[] {
+  async listByStatus(status: JobRecord["status"]): Promise<JobRecord[]> {
     return [...this.jobs.values()].filter((job) => job.status === status);
   }
 
-  metrics(deadLetterSize: number): JobQueueMetrics {
+  async metrics(deadLetterSize: number): Promise<JobQueueMetrics> {
     const values = [...this.jobs.values()];
     return {
       queued: values.filter((j) => j.status === "queued" || j.status === "delayed").length,

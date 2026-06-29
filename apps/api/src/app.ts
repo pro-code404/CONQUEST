@@ -35,6 +35,7 @@ import { createRateLimitMiddleware, type RateLimitEvent } from "./middleware/rat
 import { securityHeadersMiddleware } from "./middleware/security-headers.js";
 import { requestTimingMiddleware } from "./middleware/request-timing.js";
 import { buildOperationalStatus } from "./operational-status.js";
+import { probeDependencies } from "./infrastructure/dependency-probes.js";
 import { securityAuditMiddleware } from "./middleware/security-audit.js";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -69,6 +70,8 @@ export interface CreateApiAppDeps {
   persistenceMode?: RepositoryMode;
   apiEnv?: ValidatedApiEnv;
   redisClient?: RedisLikeClient;
+  jobService?: import("@conquest/jobs").JobService;
+  jobQueueLabel?: "redis" | "in-memory";
 }
 
 export async function createApiApp(deps?: CreateApiAppDeps) {
@@ -85,7 +88,8 @@ export async function createApiApp(deps?: CreateApiAppDeps) {
     repo = created.repo;
     persistenceMode = created.mode;
   }
-  const notifications = new NotificationService(repo, createEmailProvider(), {
+  const emailProvider = createEmailProvider();
+  const notifications = new NotificationService(repo, emailProvider, {
     ...(process.env.APP_BASE_URL ? { appBaseUrl: process.env.APP_BASE_URL } : {}),
   });
   const identity = new IdentityService(repo, undefined, notifications);
@@ -96,8 +100,13 @@ export async function createApiApp(deps?: CreateApiAppDeps) {
   const security = new SecurityService(repo);
   const audit = new AuditService(repo);
   const platform = deps?.redisClient
-    ? createPlatformServices({ redisClient: deps.redisClient })
-    : createPlatformServices();
+    ? createPlatformServices({
+        redisClient: deps.redisClient,
+        ...(deps.jobService ? { jobService: deps.jobService, jobQueueLabel: deps.jobQueueLabel } : {}),
+      })
+    : createPlatformServices({
+        ...(deps?.jobService ? { jobService: deps.jobService, jobQueueLabel: deps.jobQueueLabel } : {}),
+      });
 
   const cognitiveProvider: IntelligenceCognitiveProvider = {
     async analyze(scope, input) {
@@ -128,8 +137,12 @@ export async function createApiApp(deps?: CreateApiAppDeps) {
   const intelligence = new IntelligenceService(repo, cognitiveProvider);
   const research = new ResearchService(repo);
   const analytics = new AnalyticsService(repo);
+  let queueMetricsSnapshot = { queued: 0, running: 0, completed: 0, failed: 0, deadLetter: 0 };
+  void platform.jobs.getMetrics().then((metrics) => {
+    queueMetricsSnapshot = metrics;
+  });
   const operations = new OperationsService(repo, {
-    getQueueMetrics: () => platform.jobs.getMetrics(),
+    getQueueMetrics: () => queueMetricsSnapshot,
     getCacheStatus: () => {
       const metrics = platform.cache.getMetrics();
       return {
@@ -208,7 +221,8 @@ export async function createApiApp(deps?: CreateApiAppDeps) {
 
   app.get("/api/ops/status", async (c) => {
     opsMetrics.setCacheMetrics(platform.cache.getMetrics().hits, platform.cache.getMetrics().misses);
-    const jobMetrics = platform.jobs.getMetrics();
+    const jobMetrics = await platform.jobs.getMetrics();
+    queueMetricsSnapshot = jobMetrics;
     opsMetrics.setJobMetrics(jobMetrics.queued, jobMetrics.completed, jobMetrics.failed);
     const status = await buildOperationalStatus({
       platform,
@@ -222,6 +236,20 @@ export async function createApiApp(deps?: CreateApiAppDeps) {
       }),
     });
     return c.json(status);
+  });
+
+  app.get("/api/ops/degradation", async (c) => {
+    const report = await probeDependencies({
+      apiEnv,
+      repo,
+      persistenceMode,
+      platform,
+      redisClient: deps?.redisClient ?? null,
+      jobService: platform.jobs,
+      jobQueueLabel: platform.jobQueueLabel,
+      emailProviderName: emailProvider.name,
+    });
+    return c.json(report);
   });
 
   app.get("/api/legal/documents", (c) => c.json(legal.getPublicStatus()));

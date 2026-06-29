@@ -21,10 +21,14 @@
     "db:generate": "pnpm --filter @conquest/database db:generate",
     "db:migrate": "pnpm --filter @conquest/database db:migrate",
     "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down"
+    "docker:down": "docker compose down",
+    "test:e2e": "pnpm build && playwright test",
+    "test:e2e:install": "playwright install chromium"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.0",
+    "cross-env": "^7.0.3",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
   }

@@ -1,7 +1,7 @@
 # Build-2 Production Blocker List
 
 **Prioritized tracked work** — missing production requirements, not future assumptions.  
-**Baseline:** B2-M3 complete · 263+ tests · 2026-06-21
+**Baseline:** B2-M4 complete · 278 tests · 2026-06-21
 
 ---
 
@@ -23,7 +23,7 @@
 |----|---------|--------|--------------|
 | B2-P0-01 | Postgres not wired to API | Persistence | ~~Wire database~~ **Resolved M2** — set `DATABASE_URL`; CI uses `MEMORY_REPO` |
 | B2-P0-02 | Intelligence/research/operations home routes guard-blocked | Frontend | ~~Direct nav~~ **Resolved M1** |
-| B2-P0-03 | No email delivery (verify, invite, password reset) | Notifications | ~~Email received~~ **Partial M2** — `NotificationService` + console provider; SMTP adapter deferred |
+| B2-P0-03 | No email delivery (verify, invite, password reset) | Notifications | ~~Email received~~ **Resolved M4** — Resend + SMTP + retry + audit |
 | B2-P0-04 | Intelligence feed is auto-seeded mock data | Intelligence | ~~Cognitive pipeline~~ **Partial M1** — via research analyze |
 | B2-P0-05 | Legal pages are draft stubs | Legal | **Partial M2** — versioned copy + acceptance API; counsel review still required |
 | B2-P0-06 | No cookie consent banner | Legal/GDPR | ~~Banner~~ **Resolved M2** — `CookieConsentBanner` + API |
@@ -41,7 +41,7 @@
 
 | ID | Blocker | Domain | Verification |
 |----|---------|--------|--------------|
-| B2-P0-11 | No E2E test for closed-beta demo journey | QA | Playwright passes full script |
+| B2-P0-11 | No E2E test for closed-beta demo journey | QA | ~~Playwright~~ **Resolved M4** — `e2e/closed-beta-journey.spec.ts` |
 | B2-P0-12 | Command Center zones have no live intelligence data | UX | ~~Recommendations visible~~ **Resolved M1** |
 
 ---
@@ -68,7 +68,7 @@
 | ID | Blocker | Domain |
 |----|---------|--------|
 | B2-P1-11 | `REDIS_URL` not passed to platform bootstrap | Scaling | ~~Wired~~ **Resolved M3** — `server.ts` → `createPlatformServices` |
-| B2-P1-12 | Jobs use in-memory store only | Scaling | Partial — metrics exposed; Redis job store deferred |
+| B2-P1-12 | Jobs use in-memory store only | Scaling | ~~Resolved M4** — `createJobService` Redis backend + fallback |
 | B2-P1-13 | AI providers are stubs | AI |
 | B2-P1-14 | RLS not enforced at database layer (no DB yet) | Security |
 | B2-P1-15 | Secrets management not production-configured | Security |
