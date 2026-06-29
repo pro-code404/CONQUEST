@@ -9,6 +9,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const order = [
   "packages/core",
   "packages/observability",
+  "services/shared",
   "packages/config",
   "packages/contracts",
   "packages/database",
@@ -19,7 +20,6 @@ const order = [
   "packages/gis",
   "packages/presentation",
   "packages/engines",
-  "services/shared",
   "services/auth",
   "services/session",
   "services/jobs",

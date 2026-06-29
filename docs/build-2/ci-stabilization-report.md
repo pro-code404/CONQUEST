@@ -4,7 +4,38 @@
 **Date:** 2026-06-29  
 **Mission:** Restore GitHub Actions to green before M5 planning  
 **Baseline commit (investigation):** `cb95d60`  
-**Fix commit:** (this merge)
+**Fix commit:** `eeaa5ca` (pnpm) + build-order fix (follow-up)
+
+---
+
+## Run 9 — CI #9 (post-pnpm fix, pre-build-order fix)
+
+| Field | Value |
+|-------|-------|
+| **Workflow Run ID** | [28407267622](https://github.com/pro-code404/CONQUEST/actions/runs/28407267622) |
+| **Commit** | `eeaa5ca` — Phase 4.5: fix CI pnpm version conflict |
+| **Failed job** | `build` |
+| **Failed step** | `Run pnpm build` |
+| **Errors** | `Cannot find module '@conquest/service-shared'`; `Property 'emit' does not exist on type 'PromptRegistry'` |
+| **Root cause** | `scripts/build.mjs` compiled `packages/prompt-management` **before** `services/shared`. Fresh CI has no `dist/` — TypeScript cannot resolve `@conquest/service-shared` exports. |
+| **Resolution** | Move `services/shared` immediately after `packages/observability` in build order |
+| **Status** | **Fixed** (follow-up commit) |
+
+### Why local builds masked this
+
+Windows dev machines had stale `services/shared/dist/` from prior builds. `prompt-management` compiled against existing artifacts. CI always starts clean — exposing the ordering bug.
+
+---
+
+## Second fix applied
+
+### File changed
+
+`scripts/build.mjs`
+
+### Change
+
+Moved `services/shared` from position 22 to position 3 (after `core` and `observability`, before any consumer including `prompt-management`).
 
 ---
 
@@ -266,7 +297,7 @@ After merge, CI #9 should:
 | Fix traceable to failure | ✅ `ci.yml` only |
 | Local pipeline verified | ✅ |
 | CI stabilization report | ✅ This document |
-| GitHub Actions green | ⏳ Pending post-push verification |
+| GitHub Actions green | ⏳ Pending post-build-order push |
 | No architecture changes | ✅ |
 | No M5 work | ✅ |
 
