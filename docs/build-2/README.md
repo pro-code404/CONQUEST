@@ -2,7 +2,7 @@
 
 **Authorization:** Build-2 Integration-First Strategy (2026-06-27)  
 **Baseline:** B2-M4 Closed Beta complete · 278 tests · Playwright e2e in CI  
-**Recovery:** Phase 3 engineering memory complete — see [Project Brain](../project-brain/README.md)
+**Recovery:** Phase 4 complete (judgment + continuity test) — see [Project Brain](../project-brain/README.md)
 
 Build-2 prioritizes **production readiness** over feature count. Every task must move Conquest closer to a demonstrable, production-ready platform.
 
@@ -51,10 +51,10 @@ Build-2 prioritizes **production readiness** over feature count. Every task must
 
 ## Immediate Next Step
 
-**B2-M5 Execution Boundary** — gated. Requires formal Build-2 BAR closure on governance rows B-25–B-28. Do **not** start until Recovery Phase 2 is merged and stakeholders authorize execution work.
+**B2-M5 Execution Boundary** — gated. Requires formal Build-2 BAR closure on governance rows B-25–B-28 and stakeholder authorization. Recovery Phase 4 (documentation) is complete.
 
 **AI agent entry:** [`docs/knowledge-base/ai-agent-onboarding.md`](../knowledge-base/ai-agent-onboarding.md)
 
 ---
 
-*Last updated: Recovery Phase 2 (2026-06-21).*
+*Last updated: Recovery Phase 4 (2026-06-21).*

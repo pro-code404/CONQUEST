@@ -117,9 +117,12 @@ docs/project-brain/
   15-engineering-standards.md
   16-common-misconceptions.md
   17-worked-examples-and-scenarios.md
+  18-architectural-decision-framework.md
+  architectural-continuity-test.md
   recovery-phase-3-validation.md
+  recovery-phase-4-validation.md
 ```
 
 ---
 
-*Recovery Phase 3 complete. The repository is the permanent brain of Conquest.*
+*Recovery Phase 3 complete. Superseded for judgment layer by [Recovery Phase 4](./recovery-phase-4-validation.md) and [Chapter 18](./18-architectural-decision-framework.md).*

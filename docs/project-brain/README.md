@@ -71,8 +71,9 @@ Read in sequence. Do not skip chapters because you "already know AI."
 | 15 | [Engineering standards](./15-engineering-standards.md) | How we build, test, secure, observe |
 | 16 | [Common misconceptions](./16-common-misconceptions.md) | **Explicit false beliefs and why they are wrong** |
 | 17 | [Worked examples](./17-worked-examples-and-scenarios.md) | End-to-end scenarios with sequence diagrams |
+| 18 | [Architectural decision framework](./18-architectural-decision-framework.md) | **How future architects must think — judgment, principles, anti-patterns** |
 
-**After reading:** [Recovery Phase 3 validation](./recovery-phase-3-validation.md)
+**After reading:** [Architectural continuity test](./architectural-continuity-test.md) · [Recovery Phase 4 validation](./recovery-phase-4-validation.md)
 
 ---
 
@@ -111,8 +112,9 @@ All of the above are **false** in the current authorized codebase (Build-2 M4).
 | Next | M5 execution boundary — **gated, not started** |
 | Tests | 278 Vitest + Playwright e2e |
 | Closed-beta readiness | ~96% |
-| Recovery | Phase 3 (this corpus) — **production blocker** |
+| Recovery | Phase 4 complete — judgment layer + continuity test |
+| M5 | Gated on BAR, B-25–B-28, legal — **not** on documentation |
 
 ---
 
-*Project Brain — Recovery Phase 3. The repository is the permanent brain of Conquest.*
+*Project Brain — Recovery Phase 4. The repository is the authoritative engineering brain of Conquest.*

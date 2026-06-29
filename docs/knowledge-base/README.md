@@ -2,7 +2,7 @@
 
 Operational reference for engineers and AI agents. **For identity, intent, and complete reconstruction, read [Project Brain](../project-brain/README.md) first.**
 
-Facts reflect the codebase **post Build-2 M4** + Recovery Phase 3.
+Facts reflect the codebase **post Build-2 M4** + Recovery Phase 4.
 
 ## Document authority
 
@@ -67,4 +67,4 @@ When this KB conflicts with [`docs/architecture/`](../architecture/) or an ADR, 
 | Tests | 278 Vitest unit/integration; Playwright e2e (`pnpm test:e2e`) |
 | Demo readiness | ~96% (closed-beta target per Build-2 M4) |
 
-*Last updated: Build-2 M4 complete + Recovery Phase 2 sync, 2026-06-21.*
+*Last updated: Build-2 M4 complete + Recovery Phase 4, 2026-06-21.*

@@ -114,9 +114,10 @@ Code                    Running system
 | Phase 0 | Read-only audit | Complete |
 | Phase 1 | Authoritative state sync | Absorbed into Phase 2 |
 | Phase 2 | Document synchronization | Complete |
-| **Phase 3** | **Engineering memory consolidation** | **This corpus** |
+| Phase 3 | Engineering memory consolidation | Chapters 00–17 |
+| **Phase 4** | **Architectural intelligence preservation** | **Chapter 18 + continuity test** |
 
-Build-2 **M5 does not start** until Phase 3 is merged and validated.
+Build-2 **M5 does not start** until Recovery Phase 4 is merged **and** program gates (BAR, B-25–B-28) authorize execution work.
 
 ---
 

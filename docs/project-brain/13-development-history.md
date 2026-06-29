@@ -1,6 +1,6 @@
 # 13 — Development History
 
-Chronological evolution from architecture freeze through Recovery Phase 3.
+Chronological evolution from architecture freeze through Recovery Phase 4.
 
 ---
 
@@ -20,7 +20,8 @@ Chronological evolution from architecture freeze through Recovery Phase 3.
 | Recovery P0 | Audit | ~74% knowledge coverage |
 | Recovery P2 | Doc sync | 6 master KB docs, single truth |
 | Preview regression | Router context bug | CookieConsentBanner fix + RCA |
-| **Recovery P3** | **Project Brain** | **Engineering memory consolidation** |
+| Recovery P3 | Project Brain | Engineering memory consolidation (Ch 00–17) |
+| **Recovery P4** | **Decision framework** | **Architectural judgment + continuity test (Ch 18)** |
 
 ---
 
@@ -48,6 +49,7 @@ Build-2 explicitly prioritized **demonstrability** over new modules.
 | Production email providers | M4 |
 | RootLayout router fix | Preview RCA |
 | Project Brain | Recovery P3 |
+| Architectural decision framework | Recovery P4 |
 
 ---
 
@@ -57,7 +59,8 @@ Build-2 explicitly prioritized **demonstrability** over new modules.
 2. **CI memory fallback essential** — `MEMORY_REPO=true`  
 3. **Honest empty states** — better than fake demos  
 4. **Global UI inside router** — React Router context violations crash app  
-5. **Recovery phases** — doc sync alone insufficient without engineering memory  
+5. **Recovery phases** — doc sync alone insufficient; Phase 4 adds judgment layer  
+6. **Continuity test** — repository must prove cold-start architects need no chat history  
 
 ---
 

@@ -32,7 +32,7 @@ CCIS → AMD → PDD → UXMD → Document X → SDD I–V → ADR → Governanc
 | Product | [`docs/pdd/README.md`](docs/pdd/README.md) |
 | Experience | [`docs/uxmd/README.md`](docs/uxmd/README.md) |
 | Engineering | [`docs/sdd/README.md`](docs/sdd/README.md) |
-| Build-2 tracking | [`docs/build-2/`](docs/build-2/) — [Recovery Phase 3](docs/project-brain/recovery-phase-3-validation.md) |
+| Build-2 tracking | [`docs/build-2/`](docs/build-2/) — [Recovery Phase 4](docs/project-brain/recovery-phase-4-validation.md) |
 | Governance | [`docs/governance/`](docs/governance/) |
 
 See [`AGENTS.md`](AGENTS.md) for Chief Systems Engineer instructions.

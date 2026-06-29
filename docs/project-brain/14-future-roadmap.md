@@ -8,7 +8,7 @@ Remaining work grouped by milestone, dependencies, risks, prerequisites.
 
 | Item | Prerequisite | Risk if skipped |
 |------|--------------|-----------------|
-| Recovery Phase 3 merge | This corpus complete | Knowledge loss |
+| Recovery Phase 4 merge | Ch 18 + continuity test | Architectural drift |
 | Preview operational | Router fix + e2e smoke | Cannot validate UX |
 | Stakeholder sign-off | Phase 3 validation | Unauthorized scope |
 
