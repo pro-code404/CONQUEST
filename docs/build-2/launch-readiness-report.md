@@ -48,15 +48,16 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| GitHub Actions workflow | **Stabilized** | See [ci-stabilization-report.md](./ci-stabilization-report.md) |
+| GitHub Actions workflow | **✅ Green** | CI #12 — [ci-stabilization-report.md](./ci-stabilization-report.md) |
 | Root cause (runs 1–8) | `pnpm/action-setup` dual version pin | Fixed in `.github/workflows/ci.yml` |
-| Local `pnpm build` | ✅ Pass | |
+| Root cause (runs 9–11) | Static build order on clean checkout | Fixed — topological sort in `scripts/build.mjs` |
+| Local `pnpm build` | ✅ Pass | Clean `dist/` verified |
 | Local `pnpm lint` | ✅ Pass | |
 | Local `pnpm typecheck` | ✅ Pass | |
 | Local `pnpm test` | ✅ Pass | 282 tests (`MEMORY_REPO=true`) |
-| Playwright e2e in CI | ⏳ Verified post-fix push | Was blocked by pnpm setup failure since CI #1 |
+| Playwright e2e in CI | ✅ Pass | CI #12 |
 
-**Engineering baseline:** Repository pipeline trustworthy after Phase 4.5 merge and green CI confirmation.
+**Engineering baseline:** Repository pipeline trustworthy. Phase 4.5 complete.
 
 ---
 
@@ -80,7 +81,7 @@ Landing → Signup → Verify email → Create workspace → Onboarding
 | B2-P1-01 | Command Center zones empty | CC feels incomplete | ~~Wire intelligence feed~~ **Resolved M1** |
 | B2-P1-02 | Administration not in nav | Ops users cannot discover | ~~Add to SETTINGS_CATEGORIES~~ **Resolved M1** |
 | B2-P1-03 | Automation run is audit-only | "Run workflow" does nothing real | Execution engine (post-BAR) |
-| B2-P1-04 | No E2E test for demo journey | Regression risk | ~~Playwright/Cypress full flow~~ **Resolved M4** — `e2e/closed-beta-journey.spec.ts`; CI blocked until Phase 4.5 pnpm fix |
+| B2-P1-04 | No E2E test for demo journey | Regression risk | ~~Playwright full flow~~ **Resolved M4 + Phase 4.5** — `e2e/closed-beta-journey.spec.ts` green in CI #12 |
 | B2-P1-05 | Analytics charts deferred | Reports module incomplete | Visualization layer |
 | B2-P1-06 | Rate limiting non-enforcing | Abuse risk | **Partial M3** — 120 req/min enforced in-process; Redis-distributed upgrade planned |
 | B2-P1-07 | Legal routes guest-only | Logged-in users cannot read policies | ~~Public legal route group~~ **Resolved M2** |

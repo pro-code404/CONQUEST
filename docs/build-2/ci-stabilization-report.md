@@ -4,7 +4,21 @@
 **Date:** 2026-06-29  
 **Mission:** Restore GitHub Actions to green before M5 planning  
 **Baseline commit (investigation):** `cb95d60`  
-**Fix commit:** `eeaa5ca` (pnpm) + build-order fix (follow-up)
+**Fix commits:** `eeaa5ca` (pnpm) · `9a77f06` (build order) · `0b40032` (topological sort)
+
+---
+
+## Final verification — CI #12 ✅
+
+| Field | Value |
+|-------|-------|
+| **Workflow Run ID** | CI #12 on commit `0b40032` |
+| **Status** | **success** |
+| **Governance job** | ✅ Pass |
+| **Build job** | ✅ Pass (build, typecheck, test, Playwright e2e) |
+| **Date** | 2026-06-29 |
+
+**Phase 4.5 complete.** All GitHub Actions pass.
 
 ---
 
@@ -309,7 +323,7 @@ After merge, CI #9 should:
 | Fix traceable to failure | ✅ `ci.yml` only |
 | Local pipeline verified | ✅ |
 | CI stabilization report | ✅ This document |
-| GitHub Actions green | ⏳ Pending post-build-order push |
+| GitHub Actions green | ✅ CI #12 success (`0b40032`) |
 | No architecture changes | ✅ |
 | No M5 work | ✅ |
 
